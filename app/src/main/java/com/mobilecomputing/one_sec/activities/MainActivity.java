@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(View view) {
                     if (finalI == 0) {
-                        Intent intent = new Intent(MainActivity.this, LoginCredentialsActivity.class);
+                        Intent intent = new Intent(MainActivity.this, ViewCredentials.class);
                         startActivity(intent);
                     } else if (finalI == 1) {
                         Intent intent = new Intent(MainActivity.this, CreditCardActivity.class);

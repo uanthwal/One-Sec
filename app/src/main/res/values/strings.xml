@@ -20,4 +20,7 @@
     <string name="photo_vault">Photo Vault</string>
     <string name="notes">Notes</string>
     <string name="credit_card">Credit Card</string>
+
+
+    <string name="dummy_name">dummy name</string>
 </resources>
