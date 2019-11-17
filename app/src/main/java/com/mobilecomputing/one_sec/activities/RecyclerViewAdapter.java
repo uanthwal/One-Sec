@@ -16,16 +16,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.mobilecomputing.one_sec.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements Serializable {
 
     private ArrayList<String> mImageNames = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
     private Context mContext;
-    private DatabaseHelper myDB;
+    private transient DatabaseHelper myDB;
 
     public RecyclerViewAdapter(ArrayList<String> mImageNames, ArrayList<String> mImages, Context mContext, DatabaseHelper myDB) {
         this.mImageNames = mImageNames;
@@ -68,12 +69,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         String name = data.getString(1);
                         String username = data.getString(2);
                         String password = data.getString(3);
+                        String website = data.getString(4);
                         Intent intent = new Intent();
                         intent.setClass( mContext, LoginCredentialDetail.class);
                         intent.putExtra("NAME", name);
                         intent.putExtra("USERNAME", username);
                         intent.putExtra("PASSWORD", password);
-                        intent.putExtra("URL", name);
+                        intent.putExtra("WEBSITE", website);
+//                        intent.putExtra("database", myDB);
                         mContext.startActivity(intent);
 
                         break;

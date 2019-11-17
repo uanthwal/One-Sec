@@ -71,7 +71,7 @@
         android:layout_marginTop="20dp"
         android:textColor="@color/colorPrimary"
         android:textSize="15sp"
-        android:text="Password" />
+        android:text="password" />
 
     <EditText
         android:id="@+id/txtValuePassword"
@@ -81,4 +81,36 @@
         android:textSize="15sp"
         android:textColor="@color/colorBlack"
         android:text="@string/dummy_name" />
+
+    <TextView
+        android:id="@+id/txtWebsite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtValuePassword"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        android:text="website" />
+
+    <EditText
+        android:id="@+id/txtValueWebsite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtWebsite"
+        android:textSize="15sp"
+        android:textColor="@color/colorBlack"
+        android:text="@string/dummy_name" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnUpdateCredentials"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_below="@id/txtValueWebsite"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:textAppearance="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:textSize="15dp"
+        android:layout_marginTop="10px"
+        android:text="SAVE"/>
 </RelativeLayout>

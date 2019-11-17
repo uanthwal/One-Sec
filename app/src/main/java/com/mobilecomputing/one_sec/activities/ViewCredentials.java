@@ -20,11 +20,12 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class ViewCredentials extends AppCompatActivity {
+public class ViewCredentials extends AppCompatActivity implements Serializable {
 
     DatabaseHelper myDB;
 
@@ -61,12 +62,13 @@ public class ViewCredentials extends AppCompatActivity {
                 String name = data.getString(1);
                 String username = data.getString(2);
                 String password = data.getString(3);
+                String website = data.getString(4);
                 list.add(name + " " + username + " "+ password);
 //                ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 //                listView.setAdapter(listAdapter);
 
                 mNames.add(name);
-                String imageURL = getImageURL(name);
+                String imageURL = getImageURL(website);
                 if (imageURL!="")
                     mImageUrls.add(imageURL);
                 else
