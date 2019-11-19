@@ -22,11 +22,14 @@ public class AddCredential extends AppCompatActivity {
     private EditText inputWebsite;
     private Button btnSaveCredentials;
     DatabaseHelper myDB;
+    private Cryptography cryptography;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addcredential_layout);
+
+        cryptography = Cryptography.getInstance();
 
         if (android.os.Build.VERSION.SDK_INT > 9)
         {
@@ -64,10 +67,9 @@ public class AddCredential extends AppCompatActivity {
         btnSaveCredentials.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(inputName.getText() + " " + inputUsername.getText() + " " + inputPassword.getText());
 
                 if (inputName.length() != 0 && inputUsername.length() != 0 && inputPassword.length() != 0) {
-                    AddData(inputName.getText().toString(), inputUsername.getText().toString(), inputPassword.getText().toString(), inputWebsite.getText().toString());
+                    AddData(inputName.getText().toString(), inputUsername.getText().toString(), cryptography.encrypt(inputPassword.getText().toString()) , inputWebsite.getText().toString());
                 } else {
                     Toast.makeText(AddCredential.this, "Fields are empty", Toast.LENGTH_LONG).show();
                 }

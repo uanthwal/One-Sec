@@ -61,4 +61,7 @@ dependencies {
 
     //2FA codes
     implementation 'com.warrenstrange:googleauth:1.4.0'
+
+    //Bouncy Castle - Encryption
+    implementation 'org.bouncycastle:bcprov-ext-jdk14:1.64'
 }

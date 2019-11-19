@@ -1,7 +1,6 @@
 package com.mobilecomputing.one_sec.activities;
 
-import android.content.Intent;
-import android.database.Cursor;
+
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -43,15 +42,15 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     KeyListener originalListener;
     DatabaseHelper myDB;
 
+    private Cryptography cryptography;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logindetails_layout);
 
-
-
-
+        cryptography = Cryptography.getInstance();
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy =
@@ -79,12 +78,10 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 
         txtValueName.setText(name);
         txtValueUsername.setText(getIntent().getStringExtra("USERNAME"));
-        txtValuePassword.setText(getIntent().getStringExtra("PASSWORD"));
+        txtValuePassword.setText(cryptography.decrypt(getIntent().getStringExtra("PASSWORD")));
         txtValueWebsite.setText(getIntent().getStringExtra("WEBSITE"));
-//        myDB = (DatabaseHelper) getIntent().getSerializableExtra("database");
         myDB = new DatabaseHelper(getApplicationContext());
         itemID = myDB.getIDFromName(name);
-
 
 
         btnUpdateCredentials.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +92,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 String username = txtValueUsername.getText().toString();
                 String password = txtValuePassword.getText().toString();
                 String website = txtValueWebsite.getText().toString();
-                myDB.updateCredentials(itemID, name, username, password, website);
+                myDB.updateCredentials(itemID, name, username, cryptography.encrypt(password), website);
                 Toast.makeText(getApplicationContext(), "Details updated", Toast.LENGTH_LONG).show();
                 disableEditText(txtValueName);
                 disableEditText(txtValueUsername);
@@ -106,7 +103,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             }
         });
 
-        try{
+        try {
             String url = "https://favicongrabber.com/api/grab/";
             url += getIntent().getStringExtra("WEBSITE");
             System.out.println(url);
@@ -121,14 +118,11 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 content.append(inputLine);
             }
             in.close();
-            System.out.println(content);
             JSONObject myResponse = new JSONObject(content.toString());
-            JSONObject image = ((JSONArray)myResponse.get("icons")).getJSONObject(0);
+            JSONObject image = ((JSONArray) myResponse.get("icons")).getJSONObject(0);
             String imageURL = image.get("src").toString();
-//            System.out.println(imageURL);
             Picasso.get().load(imageURL).into(imgFavicon);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -170,8 +164,6 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             enableEditText(txtValueUsername);
             enableEditText(txtValuePassword);
             enableEditText(txtValueWebsite);
-
-
 
 
 //            String secretKey = "GAUD NDRV NY6E ZISK 7V66 BH6H 3YL7 I75D PQ3V QLVP EPRM BFY3 7YTQ";
