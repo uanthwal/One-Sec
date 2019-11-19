@@ -63,9 +63,6 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
                 String username = data.getString(2);
                 String password = data.getString(3);
                 String website = data.getString(4);
-                list.add(name + " " + username + " "+ password);
-//                ListAdapter listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-//                listView.setAdapter(listAdapter);
 
                 mNames.add(name);
                 String imageURL = getImageURL(website);
@@ -74,27 +71,14 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
                 else
                     System.out.println("Error retrieving image");
 
-                System.out.println(mNames.size());
-                System.out.println("im" + mImageUrls.size());
+//                System.out.println(mNames.size());
+//                System.out.println("im" + mImageUrls.size());
 
-                initRecyclerView(myDB);
+
             }
+            initRecyclerView(myDB);
         }
 
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                System.out.println(list.get(i));
-//                String[] values = list.get(i).split(" ");
-//                Intent intent = new Intent();
-//                intent.setClass( ViewCredentials.this, LoginCredentialDetail.class);
-//                intent.putExtra("NAME", values[0]);
-//                intent.putExtra("USERNAME", values[1]);
-//                intent.putExtra("PASSWORD", values[2]);
-//                intent.putExtra("URL", values[0]);
-//                startActivity(intent);
-//            }
-//        });
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,11 +95,11 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
         try{
             String url = "https://favicongrabber.com/api/grab/";
             url += name;
-            System.out.println(url);
+//            System.out.println(url);
             URL faviconURL = new URL(url);
             HttpURLConnection con = (HttpURLConnection) faviconURL.openConnection();
             con.setRequestMethod("GET");
-            System.out.println("picasso test");
+//            System.out.println("picasso test");
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
@@ -124,7 +108,7 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
                 content.append(inputLine);
             }
             in.close();
-            System.out.println(content);
+//            System.out.println(content);
             JSONObject myResponse = new JSONObject(content.toString());
             JSONObject image = ((JSONArray)myResponse.get("icons")).getJSONObject(0);
             String imageURL = image.get("src").toString();

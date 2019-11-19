@@ -51,9 +51,10 @@
             android:label="Credit Card Activity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".activities.LoginCredentialDetail"></activity>
-        <activity android:name=".activities.AddCredential"></activity>
         <activity android:name=".activities.ViewCredentials"></activity>
+        <activity android:name=".activities.AddCredential"></activity>
+        <activity android:name=".activities.LoginCredentialDetail"></activity>
+        <activity android:name=".activities.popup"></activity>
     </application>
 
 </manifest>

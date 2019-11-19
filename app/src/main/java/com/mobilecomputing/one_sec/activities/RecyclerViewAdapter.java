@@ -15,8 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.mobilecomputing.one_sec.R;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -26,13 +34,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private ArrayList<String> mImageNames = new ArrayList<>();
     private ArrayList<String> mImages = new ArrayList<>();
     private Context mContext;
-    private transient DatabaseHelper myDB;
+    private DatabaseHelper myDB;
 
     public RecyclerViewAdapter(ArrayList<String> mImageNames, ArrayList<String> mImages, Context mContext, DatabaseHelper myDB) {
         this.mImageNames = mImageNames;
         this.mImages = mImages;
         this.mContext = mContext;
         this.myDB = myDB;
+
     }
 
     @NonNull
@@ -46,10 +55,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         try{
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(mImages.get(position))
-                    .into(holder.image);
+            Picasso.get().load(mImages.get(position)).into(holder.image);
+//            Glide.with(mContext)
+//                    .asBitmap()
+//                    .load(mImages.get(position))
+//                    .into(holder.image);
         }
         catch(IndexOutOfBoundsException e){
             e.printStackTrace();
@@ -104,4 +114,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             parent_layout = itemView.findViewById(R.id.parent_layout);
         }
     }
+
 }

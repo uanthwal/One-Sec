@@ -92,4 +92,15 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         db.update(TABLE_NAME, cv, COL1 + "="+ id, null);
 
     }
+
+    public boolean deleteCredential(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME,   "NAME = \"" + name + "\"", null) > 0;
+    }
+
+    public Cursor getNamesWebsites(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT NAME, WEBSITE FROM " + TABLE_NAME, null);
+        return data;
+    }
 }

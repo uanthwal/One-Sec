@@ -1,6 +1,7 @@
 package com.mobilecomputing.one_sec.activities;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -156,7 +157,6 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-
         if (id == R.id.edit_item) {
             btnUpdateCredentials.setVisibility(View.VISIBLE);
             btnUpdateCredentials.setEnabled(true);
@@ -164,6 +164,11 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             enableEditText(txtValueUsername);
             enableEditText(txtValuePassword);
             enableEditText(txtValueWebsite);
+
+            Menu edit_menu = findViewById(R.id.edit_menu);
+
+            MenuItem delete_item = edit_menu.findItem(R.id.delete_item);
+            delete_item.setVisible(true);
 
 
 //            String secretKey = "GAUD NDRV NY6E ZISK 7V66 BH6H 3YL7 I75D PQ3V QLVP EPRM BFY3 7YTQ";
@@ -175,6 +180,15 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 //
 //            Toast.makeText(getApplicationContext(), "code :"+(code),Toast.LENGTH_LONG).show();
             return true;
+        }
+
+        else if (id == R.id.delete_item) {
+            myDB.deleteCredential(txtValueName.getText().toString());
+            Toast.makeText(getApplicationContext(), "Login deleted", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            intent.setClass(getApplicationContext(), ViewCredentials.class);
+            startActivity(intent);
+
         }
 
         return super.onOptionsItemSelected(item);
