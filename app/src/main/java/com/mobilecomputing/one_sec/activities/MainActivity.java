@@ -1,11 +1,18 @@
 package com.mobilecomputing.one_sec.activities;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 
 import android.view.View;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -21,9 +28,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.widget.GridLayout;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     GridLayout gridLayoutHomeGrid;
 
@@ -31,6 +39,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        getLocation();
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -44,6 +55,8 @@ public class MainActivity extends AppCompatActivity
         gridLayoutHomeGrid = findViewById(R.id.home_grid);
         onClickGridItemListener(gridLayoutHomeGrid);
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -131,4 +144,6 @@ public class MainActivity extends AppCompatActivity
             });
         }
     }
+
+
 }

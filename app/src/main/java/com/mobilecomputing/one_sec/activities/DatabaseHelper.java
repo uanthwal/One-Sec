@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
     public static final String COL3 = "USERNAME";
     public static final String COL4 = "PASSWORD";
     public static final String COL5 = "WEBSITE";
+    public static final String COL6 = "SECRETKEY";
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -28,7 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
     public void onCreate(SQLiteDatabase db) {
 //        System.out.println("onCreate test");
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                " NAME TEXT, USERNAME TEXT, PASSWORD TEXT, WEBSITE TEXT)";
+                " NAME TEXT, USERNAME TEXT, PASSWORD TEXT, WEBSITE TEXT, SECRETKEY TEXT)";
         System.out.println("query is " + createTable);
         db.execSQL(createTable);
 
@@ -40,13 +41,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         onCreate(db);
     }
 
-    public boolean addData(String item1, String item2, String item3, String item4){
+    public boolean addData(String item1, String item2, String item3, String item4, String item5){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, item1);
         contentValues.put(COL3, item2);
         contentValues.put(COL4, item3);
         contentValues.put(COL5, item4);
+        contentValues.put(COL6, item5);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
         if(result == -1){
@@ -82,13 +84,14 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
         return -1;
     }
 
-    public void updateCredentials(int id, String name, String username, String password, String website){
+    public void updateCredentials(int id, String name, String username, String password, String website, String secretkey){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COL2, name);
         cv.put(COL3, username);
         cv.put(COL4, password);
         cv.put(COL5, website);
+        cv.put(COL6, secretkey);
         db.update(TABLE_NAME, cv, COL1 + "="+ id, null);
 
     }

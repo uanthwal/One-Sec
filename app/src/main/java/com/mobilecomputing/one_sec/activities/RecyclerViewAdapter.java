@@ -81,12 +81,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         String username = data.getString(2);
                         String password = data.getString(3);
                         String website = data.getString(4);
+                        String secretKey = data.getString(5);
                         Intent intent = new Intent();
                         intent.setClass( mContext, LoginCredentialDetail.class);
                         intent.putExtra("NAME", name);
                         intent.putExtra("USERNAME", username);
                         intent.putExtra("PASSWORD", password);
                         intent.putExtra("WEBSITE", website);
+                        intent.putExtra("SECRETKEY", secretKey);
 //                        intent.putExtra("database", myDB);
                         mContext.startActivity(intent);
 

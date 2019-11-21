@@ -20,6 +20,7 @@ public class AddCredential extends AppCompatActivity {
     private EditText inputUsername;
     private EditText inputPassword;
     private EditText inputWebsite;
+    private EditText inputKey;
     private Button btnSaveCredentials;
     DatabaseHelper myDB;
     private Cryptography cryptography;
@@ -43,6 +44,7 @@ public class AddCredential extends AppCompatActivity {
         inputUsername = findViewById(R.id.inputUsername);
         inputPassword = findViewById(R.id.inputPassword);
         inputWebsite = findViewById(R.id.inputWebsite);
+        inputKey = findViewById(R.id.inputKey);
         btnSaveCredentials = findViewById(R.id.btnSaveCredentials);
 
         inputName.addTextChangedListener(new TextWatcher() {
@@ -69,7 +71,7 @@ public class AddCredential extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (inputName.length() != 0 && inputUsername.length() != 0 && inputPassword.length() != 0) {
-                    AddData(inputName.getText().toString(), inputUsername.getText().toString(), cryptography.encrypt(inputPassword.getText().toString()) , inputWebsite.getText().toString());
+                    AddData(inputName.getText().toString(), inputUsername.getText().toString(), cryptography.encrypt(inputPassword.getText().toString()) , inputWebsite.getText().toString(), inputKey.getText().toString());
                 } else {
                     Toast.makeText(AddCredential.this, "Fields are empty", Toast.LENGTH_LONG).show();
                 }
@@ -85,8 +87,8 @@ public class AddCredential extends AppCompatActivity {
 
 
 
-    public void AddData(String name, String username, String password, String website) {
-        boolean insertData = myDB.addData(name, username, password, website);
+    public void AddData(String name, String username, String password, String website, String secretkey) {
+        boolean insertData = myDB.addData(name, username, password, website, secretkey);
 
         if (insertData) {
             Toast.makeText(AddCredential.this, "Data successfully inserted", Toast.LENGTH_LONG).show();

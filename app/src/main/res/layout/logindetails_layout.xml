@@ -1,202 +1,259 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:padding="15dp">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/top_layout">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <!-- Here you put the rest of your current view-->
 
-        <ImageView
-            android:id="@+id/imgFavicon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/ic_launcher"/>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:padding="15dp">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/imgFavicon"
-            android:layout_centerVertical="true">
+            android:id="@+id/top_layout">
 
-            <EditText
-                android:id="@+id/txtValueName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorBlack"
-                android:textSize="15sp"
-                android:layout_marginLeft="30dp"
-                android:text="dummy text" />
+            <ImageView
+                android:id="@+id/imgFavicon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/ic_launcher"/>
 
-            <TextView
-                android:id="@+id/txtType"
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtValueName"
-                android:textColor="@color/colorPrimary"
-                android:textSize="13sp"
-                android:layout_marginLeft="30dp"
-                android:text="Login" />
+                android:layout_toRightOf="@id/imgFavicon"
+                android:layout_centerVertical="true">
+
+                <EditText
+                    android:id="@+id/txtValueName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="30dp"
+                    android:text="dummy text" />
+
+                <TextView
+                    android:id="@+id/txtType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtValueName"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13sp"
+                    android:layout_marginLeft="30dp"
+                    android:text="Login" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
-    </RelativeLayout>
-
-
-    <TextView
-        android:id="@+id/txtUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/top_layout"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="15sp"
-        android:text="username" />
-
-    <EditText
-        android:id="@+id/txtValueUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtUsername"
-        android:textSize="15sp"
-        android:textColor="@color/colorBlack"
-        android:text="@string/dummy_name" />
-
-    <TextView
-        android:id="@+id/txtPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtValueUsername"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="15sp"
-        android:text="password" />
-
-    <EditText
-        android:id="@+id/txtValuePassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtPassword"
-        android:textSize="15sp"
-        android:textColor="@color/colorBlack"
-        android:text="@string/dummy_name" />
-
-    <TextView
-        android:id="@+id/txtWebsite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtValuePassword"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="15sp"
-        android:text="website" />
-
-    <EditText
-        android:id="@+id/txtValueWebsite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtWebsite"
-        android:textSize="15sp"
-        android:textColor="@color/colorBlack"
-        android:text="@string/dummy_name" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnUpdateCredentials"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_below="@id/txtValueWebsite"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:textAppearance="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:textSize="15dp"
-        android:layout_marginTop="10px"
-        android:text="SAVE"/>
-
-    <TextView
-        android:id="@+id/txtPaswordGenerator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnUpdateCredentials"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="15sp"
-        android:text="password generator" />
-
-    <RelativeLayout
-        android:id="@+id/layoutPasswordGenerator"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txtPaswordGenerator"
-        android:layout_marginTop="20dp">
 
         <TextView
-            android:id="@+id/txtLength"
+            android:id="@+id/txtUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:layout_centerVertical="true"
+            android:layout_below="@id/top_layout"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp"
-            android:text="length" />
+            android:text="username" />
 
-        <SeekBar
-            android:id="@+id/seekPasswordLength"
+        <EditText
+            android:id="@+id/txtValueUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:min="8"
-            android:max="30"
-            android:layout_toRightOf="@id/txtLength"
-            android:layout_toLeftOf="@+id/txtLengthValue"
-            android:layout_centerVertical="true"/>
+            android:layout_below="@id/txtUsername"
+            android:textSize="15sp"
+            android:textColor="@color/colorBlack"
+            android:text="@string/dummy_name" />
 
         <TextView
-            android:id="@+id/txtLengthValue"
+            android:id="@+id/txtPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:layout_centerVertical="true"
+            android:layout_below="@id/txtValueUsername"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp"
-            android:layout_margin="5dp"
-            android:layout_toLeftOf="@id/btnGeneratePassword"
-            android:text="8" />
+            android:text="password" />
+
+        <EditText
+            android:id="@+id/txtValuePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtPassword"
+            android:textSize="15sp"
+            android:textColor="@color/colorBlack"
+            android:text="@string/dummy_name" />
+
+        <TextView
+            android:id="@+id/txtWebsite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtValuePassword"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:text="website" />
+
+        <EditText
+            android:id="@+id/txtValueWebsite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtWebsite"
+            android:textSize="15sp"
+            android:textColor="@color/colorBlack"
+            android:text="@string/dummy_name" />
+
+        <TextView
+            android:id="@+id/txt2FAKey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtValueWebsite"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:text="2FA Key" />
+
+        <EditText
+            android:id="@+id/txtValue2FAKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt2FAKey"
+            android:textSize="15sp"
+            android:textColor="@color/colorBlack"
+            android:text="@string/dummy_name" />
+
+        <RelativeLayout
+            android:id="@+id/layout2FA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtValue2FAKey"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
 
 
-        <ImageView
-            android:id="@+id/btnGeneratePassword"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/autorenew"
-            android:layout_alignParentEnd="true"/>
+            <TextView
+                android:id="@+id/txt2FACode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:text="2FA Key" />
+
+            <TextView
+                android:id="@+id/txt2FATimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_toRightOf="@id/txt2FACode"
+                android:layout_marginLeft="20dp"
+                android:textSize="15sp"
+                android:text="30" />
+
+
+        </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUpdateCredentials"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_below="@id/layout2FA"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:textAppearance="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:textSize="15dp"
+            android:layout_marginTop="20dp"
+            android:text="SAVE"/>
+
+        <TextView
+            android:id="@+id/txtPaswordGenerator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnUpdateCredentials"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:text="password generator" />
+
+        <RelativeLayout
+            android:id="@+id/layoutPasswordGenerator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtPaswordGenerator"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/txtLength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:text="length" />
+
+            <SeekBar
+                android:id="@+id/seekPasswordLength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:min="8"
+                android:max="30"
+                android:layout_toRightOf="@id/txtLength"
+                android:layout_toLeftOf="@+id/txtLengthValue"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/txtLengthValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:layout_margin="5dp"
+                android:layout_toLeftOf="@id/btnGeneratePassword"
+                android:text="8" />
+
+
+            <ImageView
+                android:id="@+id/btnGeneratePassword"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/autorenew"
+                android:layout_alignParentEnd="true"/>
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtGeneratedPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layoutPasswordGenerator"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:text="password"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/btnUsePassword"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_below="@id/txtGeneratedPassword"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:textAppearance="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:background="@android:color/transparent"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15dp"
+            android:text="USE AS PASSWORD"/>
 
 
     </RelativeLayout>
-
-    <TextView
-        android:id="@+id/txtGeneratedPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layoutPasswordGenerator"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/colorPrimary"
-        android:textSize="15sp"
-        android:text="password"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:id="@+id/btnUsePassword"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_below="@id/txtGeneratedPassword"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:textAppearance="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:background="@android:color/transparent"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="15dp"
-        android:text="USE AS PASSWORD"/>
-
-
-</RelativeLayout>
+</ScrollView>

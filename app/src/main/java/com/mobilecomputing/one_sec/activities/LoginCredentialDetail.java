@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.text.method.KeyListener;
 import android.view.Menu;
@@ -24,6 +25,7 @@ import com.google.android.material.button.MaterialButton;
 import com.mobilecomputing.one_sec.R;
 import com.squareup.picasso.Picasso;
 
+import org.jboss.aerogear.security.otp.Totp;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,6 +34,7 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.Random;
 
 public class LoginCredentialDetail extends AppCompatActivity implements Serializable {
@@ -39,11 +42,14 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     private EditText txtValueUsername;
     private EditText txtValuePassword;
     private EditText txtValueWebsite;
+    private EditText txtValue2FAKey;
     private ImageView imgFavicon;
 
     private MaterialButton btnUpdateCredentials;
     private ImageView btnGeneratePassword;
     private TextView txtLengthValue;
+    private TextView txt2FATimer;
+    private TextView txt2FACode;
     private TextView txtGeneratedPassword;
     private SeekBar seekPasswordLength;
     private Button btnUsePassword;
@@ -51,9 +57,11 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     Drawable originalDrawable;
     KeyListener originalListener;
     DatabaseHelper myDB;
+    boolean first = true;
 
     private Cryptography cryptography;
     private int itemID;
+    Handler handler2FA;
 
 
     @Override
@@ -73,6 +81,9 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         txtValueUsername = findViewById(R.id.txtValueUsername);
         txtValuePassword = findViewById(R.id.txtValuePassword);
         txtValueWebsite = findViewById(R.id.txtValueWebsite);
+        txtValue2FAKey = findViewById(R.id.txtValue2FAKey);
+        txt2FATimer = findViewById(R.id.txt2FATimer);
+        txt2FACode = findViewById(R.id.txt2FACode);
         btnUpdateCredentials = findViewById(R.id.btnUpdateCredentials);
         imgFavicon = findViewById(R.id.imgFavicon);
         btnGeneratePassword = findViewById(R.id.btnGeneratePassword);
@@ -85,7 +96,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         txtGeneratedPassword.setText(password);
 
 
-        btnUpdateCredentials.setVisibility(View.INVISIBLE);
+        btnUpdateCredentials.setVisibility(View.GONE);
         btnUpdateCredentials.setEnabled(false);
 
         originalListener = txtValueName.getKeyListener();
@@ -94,6 +105,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         disableEditText(txtValueUsername);
         disableEditText(txtValuePassword);
         disableEditText(txtValueWebsite);
+        disableEditText(txtValue2FAKey);
 
         String name = getIntent().getStringExtra("NAME");
 
@@ -101,8 +113,15 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         txtValueUsername.setText(getIntent().getStringExtra("USERNAME"));
         txtValuePassword.setText(cryptography.decrypt(getIntent().getStringExtra("PASSWORD")));
         txtValueWebsite.setText(getIntent().getStringExtra("WEBSITE"));
+        txtValue2FAKey.setText(getIntent().getStringExtra("SECRETKEY"));
         myDB = new DatabaseHelper(getApplicationContext());
         itemID = myDB.getIDFromName(name);
+
+        handler2FA = new Handler();
+
+
+        handler2FA.postDelayed(runnable2FA, 1000);
+
 
         btnUsePassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +132,8 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 String username = txtValueUsername.getText().toString();
                 String password = txtValuePassword.getText().toString();
                 String website = txtValueWebsite.getText().toString();
-                myDB.updateCredentials(itemID, name, username, cryptography.encrypt(password), website);
+                String secretkey = txtValue2FAKey.getText().toString();
+                myDB.updateCredentials(itemID, name, username, cryptography.encrypt(password), website, secretkey);
                 Toast.makeText(getApplicationContext(), "Details updated", Toast.LENGTH_LONG).show();
                 disableEditText(txtValueName);
                 disableEditText(txtValueUsername);
@@ -158,7 +178,8 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 String username = txtValueUsername.getText().toString();
                 String password = txtValuePassword.getText().toString();
                 String website = txtValueWebsite.getText().toString();
-                myDB.updateCredentials(itemID, name, username, cryptography.encrypt(password), website);
+                String secretKey = txtValue2FAKey.getText().toString();
+                myDB.updateCredentials(itemID, name, username, cryptography.encrypt(password), website, secretKey);
                 Toast.makeText(getApplicationContext(), "Details updated", Toast.LENGTH_LONG).show();
                 disableEditText(txtValueName);
                 disableEditText(txtValueUsername);
@@ -231,6 +252,33 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         editText.setBackground(originalDrawable);
     }
 
+    public Runnable runnable2FA = new Runnable() {
+        @Override
+        public void run() {
+
+            Calendar calendar = Calendar.getInstance();
+            int timeLeft = 29 - (calendar.get(Calendar.SECOND))%30;
+            txt2FATimer.setText(String.valueOf(timeLeft));
+//
+//            String secretKey = "GAUD NDRV NY6E ZISK 7V66 BH6H 3YL7 I75D PQ3V QLVP EPRM BFY3 7YTQ";
+            String secretKey = txtValue2FAKey.getText().toString();
+            try{
+                if(first || timeLeft==29){
+                    first = false;
+                    Totp generator = new Totp(secretKey);
+                    txt2FACode.setText(generator.now());
+                }
+                handler2FA.postDelayed(runnable2FA, 1000);
+            }
+            catch (Exception e){
+                txt2FACode.setText("2FA disabled");
+                txt2FATimer.setText("");
+            }
+
+        }
+    };
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //inflate the menu
@@ -249,6 +297,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             enableEditText(txtValueUsername);
             enableEditText(txtValuePassword);
             enableEditText(txtValueWebsite);
+            enableEditText(txtValue2FAKey);
 
 
 //            String secretKey = "GAUD NDRV NY6E ZISK 7V66 BH6H 3YL7 I75D PQ3V QLVP EPRM BFY3 7YTQ";
