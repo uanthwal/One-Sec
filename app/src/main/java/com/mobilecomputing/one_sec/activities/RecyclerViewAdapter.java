@@ -61,8 +61,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 //                    .load(mImages.get(position))
 //                    .into(holder.image);
         }
-        catch(IndexOutOfBoundsException e){
+        catch(Exception e){
             e.printStackTrace();
+            holder.image.setImageResource(R.drawable.ic_launcher_background);
         }
 //        Picasso.get().load(mImages.get(position)).into(holder.image);
         holder.imageName.setText(mImageNames.get(position));

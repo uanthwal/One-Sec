@@ -2,6 +2,7 @@ package com.mobilecomputing.one_sec.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -65,14 +66,15 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
                 String website = data.getString(4);
 
                 mNames.add(name);
+//                Favicon favicon = new Favicon();
+//                favicon.execute(website);
+
                 String imageURL = getImageURL(website);
                 if (imageURL!="")
                     mImageUrls.add(imageURL);
                 else
                     System.out.println("Error retrieving image");
 
-//                System.out.println(mNames.size());
-//                System.out.println("im" + mImageUrls.size());
 
 
             }
@@ -126,6 +128,53 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(mNames, mImageUrls, this, myDB);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    private class Favicon extends AsyncTask<String, Integer, String>{
+        @Override
+        protected String doInBackground(String... strings) {
+
+            String imageURL = getImageURL(strings[0]);
+//            Toast.makeText((), imageURL, Toast.LENGTH_SHORT).show();
+            System.out.println("imageurl "+ imageURL);
+            return imageURL;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            mImageUrls.add(s);
+        }
+
+        private String getImageURL(String name){
+
+            try{
+                String url = "https://favicongrabber.com/api/grab/";
+                url += name;
+//            System.out.println(url);
+                URL faviconURL = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) faviconURL.openConnection();
+                con.setRequestMethod("GET");
+//            System.out.println("picasso test");
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer content = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
+                }
+                in.close();
+//            System.out.println(content);
+                JSONObject myResponse = new JSONObject(content.toString());
+                JSONObject image = ((JSONArray)myResponse.get("icons")).getJSONObject(0);
+                String imageURL = image.get("src").toString();
+                return imageURL;
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+            return "";
+        }
     }
 
 

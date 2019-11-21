@@ -113,4 +113,90 @@
         android:textSize="15dp"
         android:layout_marginTop="10px"
         android:text="SAVE"/>
+
+    <TextView
+        android:id="@+id/txtPaswordGenerator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnUpdateCredentials"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        android:text="password generator" />
+
+    <RelativeLayout
+        android:id="@+id/layoutPasswordGenerator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtPaswordGenerator"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/txtLength"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:text="length" />
+
+        <SeekBar
+            android:id="@+id/seekPasswordLength"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:min="8"
+            android:max="30"
+            android:layout_toRightOf="@id/txtLength"
+            android:layout_toLeftOf="@+id/txtLengthValue"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/txtLengthValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorBlack"
+            android:layout_centerVertical="true"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
+            android:layout_toLeftOf="@id/btnGeneratePassword"
+            android:text="8" />
+
+
+        <ImageView
+            android:id="@+id/btnGeneratePassword"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/autorenew"
+            android:layout_alignParentEnd="true"/>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/txtGeneratedPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutPasswordGenerator"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        android:text="password"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/btnUsePassword"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_below="@id/txtGeneratedPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:textAppearance="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15dp"
+        android:text="USE AS PASSWORD"/>
+
+
 </RelativeLayout>

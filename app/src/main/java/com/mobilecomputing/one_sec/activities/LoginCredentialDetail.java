@@ -10,8 +10,11 @@ import android.text.method.KeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -29,6 +32,7 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 public class LoginCredentialDetail extends AppCompatActivity implements Serializable {
     private EditText txtValueName;
@@ -36,14 +40,20 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     private EditText txtValuePassword;
     private EditText txtValueWebsite;
     private ImageView imgFavicon;
-    int itemID;
-    MaterialButton btnUpdateCredentials;
+
+    private MaterialButton btnUpdateCredentials;
+    private ImageView btnGeneratePassword;
+    private TextView txtLengthValue;
+    private TextView txtGeneratedPassword;
+    private SeekBar seekPasswordLength;
+    private Button btnUsePassword;
 
     Drawable originalDrawable;
     KeyListener originalListener;
     DatabaseHelper myDB;
 
     private Cryptography cryptography;
+    private int itemID;
 
 
     @Override
@@ -65,7 +75,17 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         txtValueWebsite = findViewById(R.id.txtValueWebsite);
         btnUpdateCredentials = findViewById(R.id.btnUpdateCredentials);
         imgFavicon = findViewById(R.id.imgFavicon);
-        btnUpdateCredentials.setVisibility(View.GONE);
+        btnGeneratePassword = findViewById(R.id.btnGeneratePassword);
+        txtLengthValue = findViewById(R.id.txtLengthValue);
+        seekPasswordLength = findViewById(R.id.seekPasswordLength);
+        txtGeneratedPassword = findViewById(R.id.txtGeneratedPassword);
+        btnUsePassword = findViewById(R.id.btnUsePassword);
+
+        String password = generatePassword(8);
+        txtGeneratedPassword.setText(password);
+
+
+        btnUpdateCredentials.setVisibility(View.INVISIBLE);
         btnUpdateCredentials.setEnabled(false);
 
         originalListener = txtValueName.getKeyListener();
@@ -83,6 +103,51 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         txtValueWebsite.setText(getIntent().getStringExtra("WEBSITE"));
         myDB = new DatabaseHelper(getApplicationContext());
         itemID = myDB.getIDFromName(name);
+
+        btnUsePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtValuePassword.setText(txtGeneratedPassword.getText());
+                System.out.println(itemID);
+                String name = txtValueName.getText().toString();
+                String username = txtValueUsername.getText().toString();
+                String password = txtValuePassword.getText().toString();
+                String website = txtValueWebsite.getText().toString();
+                myDB.updateCredentials(itemID, name, username, cryptography.encrypt(password), website);
+                Toast.makeText(getApplicationContext(), "Details updated", Toast.LENGTH_LONG).show();
+                disableEditText(txtValueName);
+                disableEditText(txtValueUsername);
+                disableEditText(txtValuePassword);
+                disableEditText(txtValueWebsite);
+            }
+        });
+
+        btnGeneratePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String password = generatePassword(seekPasswordLength.getProgress());
+                txtGeneratedPassword.setText(password);
+            }
+        });
+
+        seekPasswordLength.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                txtLengthValue.setText(String.valueOf(i));
+//                System.out.println(i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                String password = generatePassword(seekBar.getProgress());
+                txtGeneratedPassword.setText(password);
+            }
+        });
 
 
         btnUpdateCredentials.setOnClickListener(new View.OnClickListener() {
@@ -129,6 +194,26 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 
     }
 
+    private String generatePassword(int length){
+          final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
+          final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
+          final String NUMBER = "0123456789";
+          final String OTHER_CHAR = "!@#$%&*()_+-=[]?";
+
+          String ALLOWED_CHAR = CHAR_LOWER + CHAR_UPPER + NUMBER + OTHER_CHAR;
+          int len = ALLOWED_CHAR.length();
+          String result = "";
+          Random rand = new Random();
+
+
+          for(int i=0; i<length; i++){
+              int pos = rand.nextInt(len);
+              result += ALLOWED_CHAR.charAt(pos);
+          }
+          return result;
+
+    }
+
     private void disableEditText(EditText editText) {
         editText.setFocusable(false);
         editText.setEnabled(false);
@@ -164,11 +249,6 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             enableEditText(txtValueUsername);
             enableEditText(txtValuePassword);
             enableEditText(txtValueWebsite);
-
-            Menu edit_menu = findViewById(R.id.edit_menu);
-
-            MenuItem delete_item = edit_menu.findItem(R.id.delete_item);
-            delete_item.setVisible(true);
 
 
 //            String secretKey = "GAUD NDRV NY6E ZISK 7V66 BH6H 3YL7 I75D PQ3V QLVP EPRM BFY3 7YTQ";
