@@ -125,6 +125,7 @@
             android:layout_below="@id/txt2FAKey"
             android:textSize="15sp"
             android:textColor="@color/colorBlack"
+            android:drawableRight="@drawable/qrcode_scan"
             android:text="@string/dummy_name" />
 
         <RelativeLayout

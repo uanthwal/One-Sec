@@ -65,4 +65,7 @@ dependencies {
     //Bouncy Castle - Encryption
     implementation 'org.bouncycastle:bcprov-ext-jdk14:1.64'
     implementation 'org.jboss.aerogear:aerogear-otp-java:1.0.0.M8'
+
+    //Google Vision - QR code scanning
+    implementation 'com.google.android.gms:play-services-vision:19.0.0'
 }

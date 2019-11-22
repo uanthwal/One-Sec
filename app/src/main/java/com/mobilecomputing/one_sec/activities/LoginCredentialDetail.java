@@ -10,6 +10,7 @@ import android.os.StrictMode;
 import android.text.method.KeyListener;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -108,19 +109,51 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         disableEditText(txtValue2FAKey);
 
         String name = getIntent().getStringExtra("NAME");
-
         txtValueName.setText(name);
         txtValueUsername.setText(getIntent().getStringExtra("USERNAME"));
-        txtValuePassword.setText(cryptography.decrypt(getIntent().getStringExtra("PASSWORD")));
+        password = getIntent().getStringExtra("PASSWORD");
+        txtValuePassword.setText(cryptography.decrypt(password));
         txtValueWebsite.setText(getIntent().getStringExtra("WEBSITE"));
         txtValue2FAKey.setText(getIntent().getStringExtra("SECRETKEY"));
+
+
         myDB = new DatabaseHelper(getApplicationContext());
         itemID = myDB.getIDFromName(name);
+        myDB.updateCredentials(itemID, name, txtValueUsername.getText().toString(),
+                cryptography.encrypt(password), txtValueWebsite.getText().toString(),
+                txtValue2FAKey.getText().toString());
 
         handler2FA = new Handler();
-
-
         handler2FA.postDelayed(runnable2FA, 1000);
+
+
+
+        txtValue2FAKey.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (txtValue2FAKey.getRight() - txtValue2FAKey.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent();
+                        intent.setClass(LoginCredentialDetail.this, QRScanner.class);
+                        intent.putExtra("NAME", txtValueName.getText().toString());
+                        intent.putExtra("USERNAME", txtValueUsername.getText().toString());
+                        intent.putExtra("PASSWORD", txtValuePassword.getText().toString());
+                        intent.putExtra("WEBSITE", txtValueWebsite.getText().toString());
+                        intent.putExtra("SECRETKEY", txtValue2FAKey.getText().toString());
+                        startActivity(intent);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
 
         btnUsePassword.setOnClickListener(new View.OnClickListener() {
@@ -299,15 +332,6 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             enableEditText(txtValueWebsite);
             enableEditText(txtValue2FAKey);
 
-
-//            String secretKey = "GAUD NDRV NY6E ZISK 7V66 BH6H 3YL7 I75D PQ3V QLVP EPRM BFY3 7YTQ";
-//            System.setProperty("com.warrenstrange.googleauth.rng.algorithmProvider", "AndroidKeyStore");
-//            System.setProperty("com.warrenstrange.googleauth.rng.algorithm", "HmacSHA1");
-//
-//            GoogleAuthenticator gAuth = new GoogleAuthenticator();
-//            int code = gAuth.getTotpPassword(secretKey);
-//
-//            Toast.makeText(getApplicationContext(), "code :"+(code),Toast.LENGTH_LONG).show();
             return true;
         }
 
@@ -317,7 +341,6 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), ViewCredentials.class);
             startActivity(intent);
-
         }
 
         return super.onOptionsItemSelected(item);
