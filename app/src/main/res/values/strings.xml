@@ -20,4 +20,6 @@
     <string name="photo_vault">Photo Vault</string>
     <string name="notes">Notes</string>
     <string name="credit_card">Credit Card</string>
+
+    <string name="Copperplate_Gothic">COPRGTB.TTF</string>
 </resources>
