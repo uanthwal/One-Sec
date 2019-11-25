@@ -1,4 +1,4 @@
-package com.example.one_sec;
+package com.mobilecomputing.one_sec.activities;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -8,7 +8,7 @@ import android.content.ContentValues;
 
 public class MyDBHandler extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "testing2DB.db";
+    private static final String DATABASE_NAME = "testing3DB.db";
     public static final String TABLE_LOGIN = "login";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_USERNAME = "username";

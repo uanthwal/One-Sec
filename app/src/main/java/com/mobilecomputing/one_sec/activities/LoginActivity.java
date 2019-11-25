@@ -1,4 +1,4 @@
-package com.example.one_sec;
+package com.mobilecomputing.one_sec.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mobilecomputing.one_sec.R;
 
 public class LoginActivity extends AppCompatActivity {
 

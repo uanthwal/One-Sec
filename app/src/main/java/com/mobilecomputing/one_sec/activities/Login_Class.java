@@ -1,4 +1,4 @@
-package com.example.one_sec;
+package com.mobilecomputing.one_sec.activities;
 
 public class Login_Class {
     private int _id;
