@@ -88,6 +88,7 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
                 Intent intent = new Intent();
                 intent.setClass(ViewCredentials.this, AddCredential.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

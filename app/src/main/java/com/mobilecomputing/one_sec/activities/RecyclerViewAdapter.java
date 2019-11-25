@@ -1,5 +1,6 @@
 package com.mobilecomputing.one_sec.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -91,6 +92,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         intent.putExtra("SECRETKEY", secretKey);
 //                        intent.putExtra("database", myDB);
                         mContext.startActivity(intent);
+                        ((Activity) mContext).finish();
 
                         break;
                     }

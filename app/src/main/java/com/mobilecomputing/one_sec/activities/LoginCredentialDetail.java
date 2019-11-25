@@ -148,6 +148,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                         intent.putExtra("WEBSITE", txtValueWebsite.getText().toString());
                         intent.putExtra("SECRETKEY", txtValue2FAKey.getText().toString());
                         startActivity(intent);
+                        finish();
                         return true;
                     }
                 }
@@ -341,6 +342,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), ViewCredentials.class);
             startActivity(intent);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

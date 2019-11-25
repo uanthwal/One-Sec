@@ -90,6 +90,7 @@ public class QRScanner extends AppCompatActivity {
                     intent.putExtra("WEBSITE", getIntent().getStringExtra("WEBSITE"));
                     intent.putExtra("SECRETKEY", secretKey);
                     startActivity(intent);
+                    finish();
                     return;
 
 //                    Toast.makeText(getApplicationContext(), qrCodes.valueAt(0).displayValue, Toast.LENGTH_SHORT).show();
