@@ -112,7 +112,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         txtValueName.setText(name);
         txtValueUsername.setText(getIntent().getStringExtra("USERNAME"));
         password = getIntent().getStringExtra("PASSWORD");
-        txtValuePassword.setText(cryptography.decrypt(password));
+        txtValuePassword.setText(password);
         txtValueWebsite.setText(getIntent().getStringExtra("WEBSITE"));
         txtValue2FAKey.setText(getIntent().getStringExtra("SECRETKEY"));
 
@@ -120,7 +120,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         myDB = new DatabaseHelper(getApplicationContext());
         itemID = myDB.getIDFromName(name);
         myDB.updateCredentials(itemID, name, txtValueUsername.getText().toString(),
-                cryptography.encrypt(password), txtValueWebsite.getText().toString(),
+                password, txtValueWebsite.getText().toString(),
                 txtValue2FAKey.getText().toString());
 
         handler2FA = new Handler();
@@ -166,7 +166,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 String password = txtValuePassword.getText().toString();
                 String website = txtValueWebsite.getText().toString();
                 String secretkey = txtValue2FAKey.getText().toString();
-                myDB.updateCredentials(itemID, name, username, cryptography.encrypt(password), website, secretkey);
+                myDB.updateCredentials(itemID, name, username, password, website, secretkey);
                 Toast.makeText(getApplicationContext(), "Details updated", Toast.LENGTH_LONG).show();
                 disableEditText(txtValueName);
                 disableEditText(txtValueUsername);
@@ -212,7 +212,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 String password = txtValuePassword.getText().toString();
                 String website = txtValueWebsite.getText().toString();
                 String secretKey = txtValue2FAKey.getText().toString();
-                myDB.updateCredentials(itemID, name, username, cryptography.encrypt(password), website, secretKey);
+                myDB.updateCredentials(itemID, name, username, password, website, secretKey);
                 Toast.makeText(getApplicationContext(), "Details updated", Toast.LENGTH_LONG).show();
                 disableEditText(txtValueName);
                 disableEditText(txtValueUsername);

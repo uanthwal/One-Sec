@@ -53,6 +53,7 @@
         <activity android:name=".activities.LoginCredentialDetail"></activity>
         <activity android:name=".activities.popup"></activity>
         <activity android:name=".activities.QRScanner"></activity>
+        <activity android:name=".activities.TestActivity"></activity>
 
         <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode"></meta-data>

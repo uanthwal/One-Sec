@@ -71,7 +71,7 @@ public class AddCredential extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (inputName.length() != 0 && inputUsername.length() != 0 && inputPassword.length() != 0) {
-                    AddData(inputName.getText().toString(), inputUsername.getText().toString(), cryptography.encrypt(inputPassword.getText().toString()) , inputWebsite.getText().toString(), inputKey.getText().toString());
+                    AddData(inputName.getText().toString(), inputUsername.getText().toString(), (inputPassword.getText().toString()) , inputWebsite.getText().toString(), inputKey.getText().toString());
                 } else {
                     Toast.makeText(AddCredential.this, "Fields are empty", Toast.LENGTH_LONG).show();
                 }
