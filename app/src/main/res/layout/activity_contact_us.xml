@@ -47,7 +47,6 @@
         android:layout_margin="10dp"
         android:background="@drawable/rounded_edittext_states"
         android:ems="10"
-
         android:hint="Subject"
         android:inputType="textPersonName"
         android:padding="8dp"
