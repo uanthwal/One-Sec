@@ -12,7 +12,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.gu.toolargetool.TooLargeTool;
 import com.mobilecomputing.one_sec.R;
+import com.mobilecomputing.one_sec.base.AppConstants;
+import com.mobilecomputing.one_sec.utils.SpUtil;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,19 +89,28 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            // Handle the camera action
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_settings) {
 
         } else if (id == R.id.nav_contact) {
-
-        } else if (id == R.id.nav_about) {
-
+            Intent intent = new Intent(MainActivity.this, ContactUsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_share) {
-
+            Intent i = new Intent(android.content.Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject test");
+            i.putExtra(android.content.Intent.EXTRA_TEXT, "extra text that you want to put");
+            startActivity(Intent.createChooser(i, "Share via"));
         } else if (id == R.id.nav_feedback) {
-
+            Intent intent = new Intent(MainActivity.this, FeedbackActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_tnc) {
-
+            Intent intent = new Intent(MainActivity.this, PolicyActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_about) {
+            Intent intent = new Intent(MainActivity.this, AboutAppActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -118,7 +132,8 @@ public class MainActivity extends AppCompatActivity
                         Intent intent = new Intent(MainActivity.this, CreditCardActivity.class);
                         startActivity(intent);
                     } else if (finalI == 2) {
-                        Intent intent = new Intent(MainActivity.this, AppLockerActivity.class);
+                        SpUtil.getInstance().getBoolean(AppConstants.LOCK_FROM_LOCK_MAIN_ACITVITY, true);
+                        Intent intent = new Intent(MainActivity.this, SplashActivity.class);
                         startActivity(intent);
                     } else if (finalI == 3) {
                         Intent intent = new Intent(MainActivity.this, PhotoVaultActivity.class);
