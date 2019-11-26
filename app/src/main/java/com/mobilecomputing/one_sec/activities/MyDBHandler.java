@@ -8,11 +8,12 @@ import android.content.ContentValues;
 
 public class MyDBHandler extends SQLiteOpenHelper{
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "testing3DB.db";
-    public static final String TABLE_LOGIN = "login";
+    private static final String DATABASE_NAME = "testing4DB.db";
+    public static final String TABLE_LOGIN = "signup";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_USERNAME = "username";
     public static final String COLUMN_PASSWORD = "password";
+    public static final String COLUMN_EMAIL = "email";
 
     //We need to pass database information along to superclass
     public MyDBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -22,39 +23,40 @@ public class MyDBHandler extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_LOGIN + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_USERNAME + " TEXT ," +
-                COLUMN_PASSWORD + " TEXT " +
+                COLUMN_USERNAME + " TEXT PRIMARY KEY," +
+                COLUMN_PASSWORD + " TEXT ," +
+                COLUMN_EMAIL + " TEXT " +
                 ");";
         db.execSQL(query);
     }
-    //Lesson 51
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN);
         onCreate(db);
     }
 
-    //Add a new row to the database
-    public void addUser(Login_Class product){
+
+    public void addUserInfo(Login_Class login){
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USERNAME, product.get_username());
-        values.put(COLUMN_PASSWORD, product.get_password());
+        values.put(COLUMN_USERNAME, login.get_username());
+        values.put(COLUMN_PASSWORD, login.get_password());
+        values.put(COLUMN_EMAIL, login.get_email());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_LOGIN, null, values);
         db.close();
     }
 
-    //Delete a product from the database
+
     public void deleteUser(String productName){
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM " + TABLE_LOGIN + " WHERE " + COLUMN_USERNAME + "=\"" + productName + "\";");
     }
 
-    // this is goint in record_TextView in the Main activity.
+
     public String printUserInfo(){
         String dbString = "";
-        SQLiteDatabase db = getWritableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_LOGIN + " WHERE 1";// why not leave out the WHERE  clause?
 
         //Cursor points to a location in your results
@@ -73,6 +75,32 @@ public class MyDBHandler extends SQLiteOpenHelper{
         }
         db.close();
         return dbString;
+    }
+
+
+    public int checkUserInfo(String username){
+        String dbString = "";
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_LOGIN + " WHERE 1";// why not leave out the WHERE  clause?
+
+        //Cursor points to a location in your results
+        Cursor recordSet = db.rawQuery(query, null);
+        //Move to the first row in your results
+        recordSet.moveToFirst();
+
+        //Position after the last row means the end of the results
+        while (!recordSet.isAfterLast()) {
+            // null could happen if we used our empty constructor
+            if (recordSet.getString(recordSet.getColumnIndex("username")) != null) {
+                if(recordSet.getString(recordSet.getColumnIndex("username")).equals(username)){
+                    return 1;
+                }
+
+            }
+            recordSet.moveToNext();
+        }
+        db.close();
+        return 0;
     }
 
 }

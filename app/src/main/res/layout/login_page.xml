@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
+    tools:context=".activities.LoginActivity"
     android:background="@drawable/gradient"
     android:layout_weight="5">
 
@@ -41,7 +41,7 @@
             android:layout_marginEnd="163dp"
             android:layout_marginBottom="173dp"
             android:background="@drawable/button_with_border"
-            android:onClick="addUserInfo"
+
             android:text="LOGIN" />
 
         <EditText
@@ -105,7 +105,9 @@
             android:textAlignment="center"
             android:textColor="#56ab2f"
             android:textSize="17sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="signupPage"
+            android:clickable="true"/>
 
         <TextView
             android:id="@+id/textView2"

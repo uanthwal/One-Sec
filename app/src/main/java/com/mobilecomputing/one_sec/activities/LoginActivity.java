@@ -2,6 +2,7 @@ package com.mobilecomputing.one_sec.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mobilecomputing.one_sec.R;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -22,35 +24,36 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_page);
         username_et = findViewById(R.id.username_et);
         password_et = findViewById(R.id.password_et);
         textbox = findViewById(R.id.textView2);
         login_bt = findViewById(R.id.login_bt);
-        //dbHandler = new DbHandler(this,null,null,1);
         dbHandler = new MyDBHandler(this, null, null, 1);
-        //printUserInfo();
+        login_bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int flag=dbHandler.checkUserInfo(username_et.getText().toString());
+                if(flag==0){
+                    Toast.makeText(getApplicationContext(), "User Do not Exist", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
 
+                    // print all users list
+                    String dbString = dbHandler.printUserInfo();
+                    Toast.makeText(getApplicationContext(),dbString,Toast.LENGTH_LONG).show();
 
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
-    public void printUserInfo() {
-        //String dbString = dbHandler.printUserInfo();
-        String dbString = dbHandler.printUserInfo();
-        //Toast.makeText(this, "user "+dbString+" created", Toast.LENGTH_LONG).show();  // all users
-        username_et.setText("");
-        password_et.setText("");
+    public void signupPage(View view) {
+        Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
+        startActivity(intent);
     }
-    public void addUserInfo(View view){
-        //Login login = new Login(username_et.getText().toString(),password_et.getText().toString());
-        Login_Class login = new Login_Class(username_et.getText().toString(),password_et.getText().toString());
-        Toast.makeText(this,"user "+login.get_username()+" created",Toast.LENGTH_LONG).show();
-        //dbHandler.addUserInfo(login);
-        dbHandler.addUser(login);
-        printUserInfo();
-    }
-
-
-
 
 }
