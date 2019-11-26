@@ -68,4 +68,6 @@ dependencies {
 
     //Google Vision - QR code scanning
     implementation 'com.google.android.gms:play-services-vision:19.0.0'
+    implementation 'org.litepal.android:core:1.4.1'
+    implementation 'com.gu.android:toolargetool:0.2.1@aar'
 }
