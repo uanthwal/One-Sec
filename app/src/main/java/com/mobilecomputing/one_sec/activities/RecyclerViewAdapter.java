@@ -92,7 +92,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         intent.putExtra("SECRETKEY", secretKey);
 //                        intent.putExtra("database", myDB);
                         mContext.startActivity(intent);
-                        ((Activity) mContext).finish();
+                        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+//                        ((Activity) mContext).finish();
 
                         break;
                     }

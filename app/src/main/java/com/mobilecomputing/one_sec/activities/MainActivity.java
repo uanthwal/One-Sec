@@ -19,7 +19,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
-import com.gu.toolargetool.TooLargeTool;
 import com.mobilecomputing.one_sec.R;
 import com.mobilecomputing.one_sec.base.AppConstants;
 import com.mobilecomputing.one_sec.utils.SpUtil;
@@ -141,6 +140,7 @@ public class MainActivity extends AppCompatActivity
                     if (finalI == 0) {
                         Intent intent = new Intent(MainActivity.this, ViewCredentials.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } else if (finalI == 1) {
                         Intent intent = new Intent(MainActivity.this, CreditCardActivity.class);
                         startActivity(intent);
