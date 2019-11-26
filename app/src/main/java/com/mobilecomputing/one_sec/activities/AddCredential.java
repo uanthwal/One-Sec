@@ -78,6 +78,7 @@ public class AddCredential extends AppCompatActivity {
 
                 Intent intent = new Intent(AddCredential.this, ViewCredentials.class);
                 startActivity(intent);
+                finish();
 
             }
 

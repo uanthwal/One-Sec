@@ -71,9 +71,11 @@
             android:label="Credit Card Activity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".activities.ViewCredentials"></activity>
+        <activity android:name=".activities.ViewCredentials"
+            android:theme="@style/AppTheme.Credentials"></activity>
         <activity android:name=".activities.AddCredential"></activity>
-        <activity android:name=".activities.LoginCredentialDetail"></activity>
+        <activity android:name=".activities.LoginCredentialDetail"
+            android:theme="@style/AppTheme.Credentials"></activity>
         <activity android:name=".activities.popup"></activity>
         <activity android:name=".activities.QRScanner"></activity>
         <activity android:name=".activities.TestActivity"></activity>
