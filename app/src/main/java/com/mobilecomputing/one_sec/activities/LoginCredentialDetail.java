@@ -249,6 +249,12 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
     private String generatePassword(int length){
           final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
           final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
