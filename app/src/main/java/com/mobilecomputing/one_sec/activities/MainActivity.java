@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import android.transition.Explode;
 import android.view.View;
 
 import androidx.cardview.widget.CardView;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initAnimation();
 
 
         setContentView(R.layout.activity_main);
@@ -128,6 +130,17 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void initAnimation() {
+        Explode enterTransition = new Explode();
+        enterTransition.setDuration(500);
+        getWindow().setEnterTransition(enterTransition);
+
+//        Slide enterTransition = new Slide();
+//        enterTransition.setSlideEdge(Gravity.RIGHT);
+//        enterTransition.setDuration(500);
+//        getWindow().setEnterTransition(enterTransition);
     }
 
     private void onClickGridItemListener(GridLayout mainGrid) {

@@ -27,7 +27,8 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:id="@+id/image"
-                android:src="@mipmap/ic_launcher_round"/>
+                android:src="@mipmap/ic_launcher_round"
+                android:transitionName="favicon_transition"/>
             <TextView
                 android:id="@+id/imageName"
                 android:layout_width="wrap_content"
@@ -37,7 +38,8 @@
                 android:layout_centerVertical="true"
                 android:textColor="@color/colorBlack"
                 android:text="Canada"
-                android:textSize="17sp"/>
+                android:textSize="17sp"
+                android:transitionName="login_name_transition"/>
 
         </RelativeLayout>
 

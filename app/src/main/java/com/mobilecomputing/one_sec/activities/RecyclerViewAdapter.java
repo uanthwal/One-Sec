@@ -1,9 +1,11 @@
 package com.mobilecomputing.one_sec.activities;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.mobilecomputing.one_sec.R;
+import com.mobilecomputing.one_sec.mvp.contract.LockMainContract;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -54,7 +59,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         try{
             Picasso.get().load(mImages.get(position)).into(holder.image);
 //            Glide.with(mContext)
@@ -91,8 +96,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         intent.putExtra("WEBSITE", website);
                         intent.putExtra("SECRETKEY", secretKey);
 //                        intent.putExtra("database", myDB);
-                        mContext.startActivity(intent);
-                        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+
+                        Pair[] pairs = new Pair[1];
+                        pairs[0] = new Pair<View, String>(holder.image, ViewCompat.getTransitionName(holder.image));
+//                        pairs[1] = new Pair<View, String>(holder.imageName, ViewCompat.getTransitionName(holder.imageName));
+                        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(((Activity) mContext), pairs);
+                        mContext.startActivity(intent, options.toBundle());
+//                        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
 //                        ((Activity) mContext).finish();
 

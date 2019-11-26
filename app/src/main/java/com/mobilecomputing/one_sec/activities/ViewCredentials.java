@@ -5,6 +5,10 @@ import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.transition.Explode;
+
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
@@ -38,6 +42,10 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewcontents_layout);
+        setTitle("Credentials");
+
+
+
 
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy =
@@ -92,6 +100,19 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
             }
         });
     }
+
+    private void initAnimation() {
+//        Explode enterTransition = new Explode();
+//        enterTransition.setDuration(500);
+//        getWindow().setEnterTransition(enterTransition);
+
+        Slide enterTransition = new Slide();
+        enterTransition.setSlideEdge(Gravity.RIGHT);
+        enterTransition.setDuration(500);
+        getWindow().setEnterTransition(enterTransition);
+    }
+
+
 
     @Override
     public void finish() {

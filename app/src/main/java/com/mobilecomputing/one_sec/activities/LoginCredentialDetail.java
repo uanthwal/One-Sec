@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.text.method.KeyListener;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -69,6 +72,8 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logindetails_layout);
+        setTitle("Login");
+        initAnimation();
 
         cryptography = Cryptography.getInstance();
 
@@ -247,6 +252,17 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             e.printStackTrace();
         }
 
+    }
+
+    private void initAnimation() {
+        Explode enterTransition = new Explode();
+        enterTransition.setDuration(500);
+        getWindow().setEnterTransition(enterTransition);
+
+//        Slide enterTransition = new Slide();
+//        enterTransition.setSlideEdge(Gravity.RIGHT);
+//        enterTransition.setDuration(500);
+//        getWindow().setEnterTransition(enterTransition);
     }
 
     @Override
