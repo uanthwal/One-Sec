@@ -1,19 +1,11 @@
 package com.mobilecomputing.one_sec.activities;
 
-import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
-
 import android.transition.Explode;
 import android.view.View;
 
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -34,16 +26,21 @@ import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     GridLayout gridLayoutHomeGrid;
     int backButtonPressCount = 0;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initAnimation();
+
+//        initFingerprint();
 
 
         setContentView(R.layout.activity_main);
@@ -69,6 +66,8 @@ public class MainActivity extends AppCompatActivity
         gridLayoutHomeGrid = findViewById(R.id.home_grid);
         onClickGridItemListener(gridLayoutHomeGrid);
     }
+
+
 
 
 

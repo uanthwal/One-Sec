@@ -27,7 +27,6 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class TestActivity extends AppCompatActivity implements LocationListener {
     protected LocationManager locationManager;
-    protected LocationListener locationListener;
 
     private static final String[] LOCATION_PERMS={
             Manifest.permission.ACCESS_FINE_LOCATION,

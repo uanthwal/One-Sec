@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         if (SpUtil.getInstance().getString("email", "-1").equals("-1")) {
             SpUtil.getInstance().clear();
         } else {
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, FingerprintAuthentication.class);
             startActivity(intent);
         }
 //        dbHandler.addDummyUser();
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                         SpUtil.getInstance().putString("dob", loginInfo.getDob());
                         SpUtil.getInstance().putString("mob_num", loginInfo.getMobNum());
                         SpUtil.getInstance().putString("email", loginInfo.getEmail());
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginActivity.this, FingerprintAuthentication.class);
                         startActivity(intent);
                     } else {
                         onShakeImage();
