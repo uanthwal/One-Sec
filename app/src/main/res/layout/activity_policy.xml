@@ -11,7 +11,7 @@
         android:background="@color/colorPrimary">
 
         <TextView
-            android:id="@+id/album_title"
+            android:id="@+id/page_title"
             android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="30dp"

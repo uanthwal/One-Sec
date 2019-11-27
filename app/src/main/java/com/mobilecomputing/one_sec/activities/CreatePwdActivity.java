@@ -2,8 +2,10 @@ package com.mobilecomputing.one_sec.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -57,7 +59,6 @@ public class CreatePwdActivity extends BaseActivity implements View.OnClickListe
         mLockTip = findViewById(R.id.lock_tip);
         mBtnReset = findViewById(R.id.btn_reset);
         mTopLayout = findViewById(R.id.top_layout);
-//        mTopLayout.setPadding(0, SystemBarHelper.getStatusBarHeight(this), 0, 0);
     }
 
     @Override

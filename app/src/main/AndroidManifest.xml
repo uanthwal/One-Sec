@@ -37,7 +37,7 @@
             android:label="RestartServiceWhenStopped"></receiver>
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -48,6 +48,11 @@
         </activity>
         <activity
             android:name=".activities.SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -134,6 +139,10 @@
 
         <activity
             android:name=".activities.FeedbackActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.SignupActivity"
             android:screenOrientation="portrait" />
 
         <service android:name=".services.LoadAppListService" />
