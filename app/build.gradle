@@ -73,4 +73,7 @@ dependencies {
 
     //Distance calculation
     implementation 'org.apache.lucene:lucene-spatial:8.2.0'
+
+    //gms location
+    implementation "com.google.android.gms:play-services-location:15.0.1"
 }

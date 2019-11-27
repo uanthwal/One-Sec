@@ -23,6 +23,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.mobilecomputing.one_sec.R;
 
 import java.io.IOException;
@@ -68,6 +71,8 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
             Manifest.permission.ACCESS_COARSE_LOCATION
     };
 
+    private FusedLocationProviderClient fusedLocationClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +80,45 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
         sharedpreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
 
+        if(ActivityCompat.checkSelfPermission(FingerprintAuthentication.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            System.out.println("No permissions");
+            requestPermissions(LOCATION_PERMS, 190);
+        }
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        // Got last known location. In some lrare situations this can be null.
+                        if (location != null) {
+                            // Logic to handle location object
+                            System.out.println("last loc " + location.getLatitude()+" "+location.getLongitude());
+                            latitude = sharedpreferences.getFloat(trustedLatitude, 0.0f);
+                            longitude = sharedpreferences.getFloat(trustedLongitude, 0.0f);
+                            System.out.println("latitude "+latitude+" longitude "+longitude);
+                            double distance = distance(latitude, longitude,
+                                    location.getLatitude(), location.getLongitude());
+                            System.out.println("distance is "+ distance);
+                            if(!addTrustedLocation && distance < 500){
+                                Intent intent = new Intent();
+                                intent.setClass(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                        else{
+                            System.out.println("No last known loaction");
+                        }
+                    }
+                });
+
+//        Location lastKnownLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
 
         btnAddTrustedPlace = findViewById(R.id.btnAddTrustedPlace);
+
 
         btnAddTrustedPlace.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +127,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                     System.out.println("No permissions");
                     requestPermissions(LOCATION_PERMS, 190);
                 }
+                addTrustedLocation = true;
 
 
                 Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -96,6 +139,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                 editor.putFloat(trustedLongitude, (float) longitude);
                 editor.commit();
                 Toast.makeText(getApplicationContext(), "Authenticate to continue", Toast.LENGTH_SHORT).show();
+                initFingerprint();
             }
         });
 
@@ -131,7 +175,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
         double distance = distance(latitude, longitude,
                 location.getLatitude(), location.getLongitude());
         System.out.println("distance "+distance);
-        if(distance < 5){
+        if(!addTrustedLocation && distance < 5){
             Intent intent = new Intent();
             intent.setClass(getApplicationContext(), MainActivity.class);
             startActivity(intent);
