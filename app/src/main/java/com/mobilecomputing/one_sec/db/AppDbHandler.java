@@ -13,7 +13,7 @@ public class AppDbHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "one-sec.db";
     public static final String TABLE_LOGIN = "login";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_USERNAME = "username";
+    public static final String COLUMN_USER_NAME = "name";
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_DOB = "dob";
     public static final String COLUMN_MOB_NUM = "mob_num";
@@ -28,7 +28,7 @@ public class AppDbHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_LOGIN + "(" +
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_USERNAME + " TEXT ," +
+                COLUMN_USER_NAME + " TEXT ," +
                 COLUMN_PASSWORD + " TEXT ," +
                 COLUMN_DOB + " TEXT ," +
                 COLUMN_EMAIL + " TEXT ," +
@@ -43,27 +43,27 @@ public class AppDbHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addUser(LoginInfo product) {
+    public void addNewUser(LoginInfo userLogin) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USERNAME, product.getUsername());
-        values.put(COLUMN_PASSWORD, product.getPassword());
-        values.put(COLUMN_MOB_NUM, product.getPassword());
-        values.put(COLUMN_EMAIL, product.getPassword());
-        values.put(COLUMN_DOB, product.getPassword());
+        values.put(COLUMN_USER_NAME, userLogin.getName());
+        values.put(COLUMN_PASSWORD, userLogin.getPassword());
+        values.put(COLUMN_MOB_NUM, userLogin.getMobNum());
+        values.put(COLUMN_EMAIL, userLogin.getEmail());
+        values.put(COLUMN_DOB, userLogin.getDob());
         SQLiteDatabase db = getWritableDatabase();
         db.insert(TABLE_LOGIN, null, values);
         db.close();
     }
 
-    public LoginInfo getUser(String username, String password) {
+    public LoginInfo authenticateUser(String email, String password) {
         LoginInfo loginInfo = new LoginInfo();
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_LOGIN + " WHERE " + COLUMN_USERNAME + " = '" + username + "' AND " + COLUMN_PASSWORD + " = '" + password + "'";// why not leave out the WHERE  clause?
+        String query = "SELECT * FROM " + TABLE_LOGIN + " WHERE " + COLUMN_EMAIL + " = '" + email + "' AND " + COLUMN_PASSWORD + " = '" + password + "'";// why not leave out the WHERE  clause?
         Cursor recordSet = db.rawQuery(query, null);
         recordSet.moveToFirst();
         if (recordSet.getCount() == 1) {
-            loginInfo.setUsername(recordSet.getString(recordSet.getColumnIndex("username")));
             loginInfo.setMobNum(recordSet.getString(recordSet.getColumnIndex("mob_num")));
+            loginInfo.setName(recordSet.getString(recordSet.getColumnIndex("name")));
             loginInfo.setDob(recordSet.getString(recordSet.getColumnIndex("dob")));
             loginInfo.setEmail(recordSet.getString(recordSet.getColumnIndex("email")));
         }
@@ -71,9 +71,23 @@ public class AppDbHandler extends SQLiteOpenHelper {
         return loginInfo;
     }
 
+    public int checkIfUserExists(String email) {
+        LoginInfo loginInfo = new LoginInfo();
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_LOGIN + " WHERE " + COLUMN_EMAIL + " = '" + email+ "'";// why not leave out the WHERE  clause?
+        Cursor recordSet = db.rawQuery(query, null);
+        recordSet.moveToFirst();
+        int flag = -1;
+        if (recordSet.getCount() > 0) {
+            flag = 1;
+        }
+        db.close();
+        return flag;
+    }
+
     public void addDummyUser() {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_USERNAME, "upendra");
+        values.put(COLUMN_USER_NAME, "upendra");
         values.put(COLUMN_PASSWORD, "pass");
         values.put(COLUMN_EMAIL, "uanthwal@gmail.com");
         values.put(COLUMN_MOB_NUM, "9024031170");

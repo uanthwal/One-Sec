@@ -122,6 +122,10 @@
             android:name=".activities.FeedbackActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activities.SignupActivity"
+            android:screenOrientation="portrait" />
+
         <service android:name=".services.LoadAppListService" />
         <service android:name=".services.LockService" />
 

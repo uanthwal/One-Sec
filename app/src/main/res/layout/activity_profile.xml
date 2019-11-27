@@ -42,7 +42,7 @@
                 android:src="@mipmap/user_icon" />
 
             <TextView
-                android:id="@+id/album_title"
+                android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_below="@+id/profile_pic"
@@ -67,8 +67,8 @@
 
         <ImageView
             android:id="@+id/phn_img"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:src="@mipmap/mobile_num" />
 
@@ -82,7 +82,7 @@
             android:gravity="center_vertical"
             android:text="902 403 1171"
             android:textColor="@color/tr_black50"
-            android:textSize="12sp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -95,8 +95,8 @@
 
         <ImageView
             android:id="@+id/mail_img"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:src="@mipmap/email" />
 
@@ -110,7 +110,7 @@
             android:gravity="center_vertical"
             android:text="android@one-sec.com"
             android:textColor="@color/tr_black50"
-            android:textSize="12sp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -123,8 +123,8 @@
 
         <ImageView
             android:id="@+id/pass_img"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:src="@mipmap/password" />
 
@@ -138,7 +138,7 @@
             android:gravity="center_vertical"
             android:text="***********"
             android:textColor="@color/tr_black50"
-            android:textSize="12sp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -151,8 +151,8 @@
 
         <ImageView
             android:id="@+id/dob_img"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:src="@mipmap/cake" />
 
@@ -166,11 +166,11 @@
             android:gravity="center_vertical"
             android:text="03-Dec-1994"
             android:textColor="@color/tr_black50"
-            android:textSize="12sp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_images"
+        android:id="@+id/fab_edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

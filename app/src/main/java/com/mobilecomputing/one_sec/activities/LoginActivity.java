@@ -14,6 +14,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mobilecomputing.one_sec.R;
 import com.mobilecomputing.one_sec.db.AppDbHandler;
@@ -22,11 +24,13 @@ import com.mobilecomputing.one_sec.utils.SpUtil;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText editTextUsername, editTextPassword;
+    EditText editTextEmail, editTextPassword;
     AppDbHandler dbHandler;
     Button buttonLogin;
     ImageView showHidePass, mainLogo;
+    TextView textViewSignUp;
     boolean isPassHidden;
+    int backButtonPressCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,12 +39,13 @@ public class LoginActivity extends AppCompatActivity {
         isPassHidden = true;
         mainLogo = findViewById(R.id.logo_imgvw);
         setMainLogoAnimation(3000);
-        editTextUsername = findViewById(R.id.edit_txt_username);
+        editTextEmail = findViewById(R.id.edit_txt_email);
         editTextPassword = findViewById(R.id.edit_txt_password);
         showHidePass = findViewById(R.id.show_hide_pass);
         buttonLogin = findViewById(R.id.login_btn);
+        textViewSignUp = findViewById(R.id.sign_up);
         dbHandler = new AppDbHandler(this, null, null, 1);
-        if (SpUtil.getInstance().getString("username", "-1").equals("-1")) {
+        if (SpUtil.getInstance().getString("email", "-1").equals("-1")) {
             SpUtil.getInstance().clear();
         } else {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -52,8 +57,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int flag = 0;
                 setMainLogoAnimation(1000);
-                if (editTextUsername.getText().toString().equals("")) {
-                    editTextUsername.setError("Please enter username");
+                if (editTextEmail.getText().toString().equals("")) {
+                    editTextPassword.setError("Please enter email address");
                     flag = -1;
                 }
                 if (editTextPassword.getText().toString().equals("")) {
@@ -61,9 +66,9 @@ public class LoginActivity extends AppCompatActivity {
                     flag = -1;
                 }
                 if (flag == 0) {
-                    LoginInfo loginInfo = dbHandler.getUser(editTextUsername.getText().toString(), editTextPassword.getText().toString());
-                    if (loginInfo.getUsername() != null) {
-                        SpUtil.getInstance().putString("username", loginInfo.getUsername());
+                    LoginInfo loginInfo = dbHandler.authenticateUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+                    if (loginInfo.getEmail() != null) {
+                        SpUtil.getInstance().putString("name", loginInfo.getName());
                         SpUtil.getInstance().putString("dob", loginInfo.getDob());
                         SpUtil.getInstance().putString("mob_num", loginInfo.getMobNum());
                         SpUtil.getInstance().putString("email", loginInfo.getEmail());
@@ -90,6 +95,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        textViewSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setMainLogoAnimation(int duration) {
@@ -103,5 +116,18 @@ public class LoginActivity extends AppCompatActivity {
         Animation shake;
         shake = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.linear_interpolator);
         mainLogo.startAnimation(shake);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backButtonPressCount >= 1) {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Press the back button once again to exit.", Toast.LENGTH_SHORT).show();
+            backButtonPressCount++;
+        }
     }
 }
