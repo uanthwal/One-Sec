@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             SpUtil.getInstance().clear();
         } else {
             Intent intent = new Intent(LoginActivity.this, FingerprintAuthentication.class);
-            startActivity(intent);
+//            startActivity(intent);
         }
 //        dbHandler.addDummyUser();
         buttonLogin.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                         SpUtil.getInstance().putString("dob", loginInfo.getDob());
                         SpUtil.getInstance().putString("mob_num", loginInfo.getMobNum());
                         SpUtil.getInstance().putString("email", loginInfo.getEmail());
-                        Intent intent = new Intent(LoginActivity.this, FingerprintAuthentication.class);
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
                         onShakeImage();
