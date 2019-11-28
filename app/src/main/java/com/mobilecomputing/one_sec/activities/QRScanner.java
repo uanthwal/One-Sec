@@ -26,6 +26,7 @@ public class QRScanner extends AppCompatActivity {
     SurfaceView cameraPreview;
     CameraSource cameraSource;
     BarcodeDetector barcodeDetector;
+    boolean once = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,7 +82,8 @@ public class QRScanner extends AppCompatActivity {
             public void receiveDetections(Detector.Detections<Barcode> detections) {
                 SparseArray<Barcode> qrCodes = detections.getDetectedItems();
 
-                if(qrCodes.size() != 0){
+                if(qrCodes.size() != 0 && once){
+                    once = false;
                     String secretKey = qrCodes.valueAt(0).displayValue;
                     Intent intent = new Intent(getApplicationContext(), LoginCredentialDetail.class);
                     intent.putExtra("NAME", getIntent().getStringExtra("NAME"));
@@ -92,6 +94,7 @@ public class QRScanner extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                     return;
+
 
 //                    Toast.makeText(getApplicationContext(), qrCodes.valueAt(0).displayValue, Toast.LENGTH_SHORT).show();
 

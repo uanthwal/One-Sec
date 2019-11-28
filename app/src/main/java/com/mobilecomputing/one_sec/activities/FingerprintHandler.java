@@ -2,7 +2,6 @@ package com.mobilecomputing.one_sec.activities;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -39,7 +38,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationError(int errMsgId, CharSequence errString) {
 
 
-        Toast.makeText(context, "Authentication error\n" + errString, Toast.LENGTH_LONG).show();
+//        Toast.makeText(context, "Authentication error\n" + errString, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -58,7 +57,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationSucceeded(
             FingerprintManager.AuthenticationResult result) {
 
-        Toast.makeText(context, "Success!", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Authentication success!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent();
         intent.setClass(context, MainActivity.class);
         context.startActivity(intent);

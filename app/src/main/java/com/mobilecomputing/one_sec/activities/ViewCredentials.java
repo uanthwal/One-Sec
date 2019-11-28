@@ -69,6 +69,7 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
         else{
             while(data.moveToNext()){
                 String name = data.getString(1);
+                System.out.println("name "+name);
                 String username = data.getString(2);
                 String password = data.getString(3);
                 String website = data.getString(4);

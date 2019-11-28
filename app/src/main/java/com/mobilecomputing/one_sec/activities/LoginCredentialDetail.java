@@ -144,7 +144,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     if(event.getRawX() >= (txtValue2FAKey.getRight() - txtValue2FAKey.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         // your action here
-                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent();
                         intent.setClass(LoginCredentialDetail.this, QRScanner.class);
                         intent.putExtra("NAME", txtValueName.getText().toString());

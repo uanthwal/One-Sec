@@ -72,6 +72,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
     };
 
     private FusedLocationProviderClient fusedLocationClient;
+    Location lastKnownLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +92,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
-                        // Got last known location. In some lrare situations this can be null.
+                        lastKnownLocation = location;
                         if (location != null) {
                             // Logic to handle location object
                             System.out.println("last loc " + location.getLatitude()+" "+location.getLongitude());
@@ -130,7 +131,13 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                 addTrustedLocation = true;
 
 
+
+
+
                 Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if(loc == null){
+                    loc = lastKnownLocation;
+                }
                 System.out.println("abc" + loc.getLongitude()+" "+loc.getLatitude());
                 latitude = loc.getLatitude();
                 longitude = loc.getLongitude();
@@ -154,8 +161,9 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
             System.out.println("No permissions");
             requestPermissions(LOCATION_PERMS, 190);
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-
+        if(ActivityCompat.checkSelfPermission(FingerprintAuthentication.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        }
 
     }
 
@@ -225,6 +233,14 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                     (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
             fingerprintManager =
                     (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
+
+            if(fingerprintManager == null){
+                Intent intent = new Intent();
+                intent.setClass(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                return;
+            }
 
             textView = (TextView) findViewById(R.id.textView);
 
