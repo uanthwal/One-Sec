@@ -7,20 +7,28 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.Manifest;
+import android.media.Image;
 import android.os.Build;
 import android.os.CancellationSignal;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+
+import com.mobilecomputing.one_sec.R;
 
 @TargetApi(Build.VERSION_CODES.M)
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
 
     private CancellationSignal cancellationSignal;
     private Context context;
+    ImageView fingerprintImage;
 
     public FingerprintHandler(Context mContext) {
         context = mContext;
+        fingerprintImage = ((Activity)context).findViewById(R.id.imageView);
     }
 
     public void startAuth(FingerprintManager manager, FingerprintManager.CryptoObject cryptoObject) {
@@ -45,7 +53,14 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
 
 
     public void onAuthenticationFailed() {
+        shakeImage();
         Toast.makeText(context, "Authentication failed", Toast.LENGTH_LONG).show();
+    }
+
+    public void shakeImage() {
+        Animation shake;
+        shake = AnimationUtils.loadAnimation(context, R.anim.linear_interpolator);
+        fingerprintImage.startAnimation(shake);
     }
 
     @Override

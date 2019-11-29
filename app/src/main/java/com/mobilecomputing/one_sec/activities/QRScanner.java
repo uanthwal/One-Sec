@@ -50,7 +50,7 @@ public class QRScanner extends AppCompatActivity {
                                     QRScanner.this,
                                     new String[] { Manifest.permission.CAMERA },
                                     1234);
-//                    return;
+                    return;
                 }
                 try{
                     cameraSource.start(surfaceHolder);

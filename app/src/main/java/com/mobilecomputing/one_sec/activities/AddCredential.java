@@ -92,7 +92,7 @@ public class AddCredential extends AppCompatActivity {
         boolean insertData = myDB.addData(name, username, password, website, secretkey);
 
         if (insertData) {
-            Toast.makeText(AddCredential.this, "Data successfully inserted", Toast.LENGTH_LONG).show();
+            Toast.makeText(AddCredential.this, "Login Credentials saved", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(AddCredential.this, "Data insertion error. Check log for details", Toast.LENGTH_LONG).show();
         }
