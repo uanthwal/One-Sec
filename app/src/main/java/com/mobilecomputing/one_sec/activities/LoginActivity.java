@@ -27,21 +27,18 @@ public class LoginActivity extends AppCompatActivity {
     EditText editTextEmail, editTextPassword;
     AppDbHandler dbHandler;
     Button buttonLogin;
-    ImageView showHidePass, mainLogo;
+    ImageView mainLogo;
     TextView textViewSignUp;
-    boolean isPassHidden;
     int backButtonPressCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        isPassHidden = true;
         mainLogo = findViewById(R.id.logo_imgvw);
         setMainLogoAnimation(3000);
         editTextEmail = findViewById(R.id.edit_txt_email);
         editTextPassword = findViewById(R.id.edit_txt_password);
-        showHidePass = findViewById(R.id.show_hide_pass);
         buttonLogin = findViewById(R.id.login_btn);
         textViewSignUp = findViewById(R.id.sign_up);
         dbHandler = new AppDbHandler(this, null, null, 1);
@@ -51,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, FingerprintAuthentication.class);
             startActivity(intent);
         }
-//        dbHandler.addDummyUser();
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,21 +73,6 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         onShakeImage();
                     }
-                }
-            }
-        });
-        showHidePass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isPassHidden) {
-                    isPassHidden = false;
-                    editTextPassword.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                    showHidePass.setImageResource(R.mipmap.visible);
-                } else {
-                    isPassHidden = true;
-                    showHidePass.setImageResource(R.mipmap.hide);
-                    editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    editTextPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 }
             }
         });

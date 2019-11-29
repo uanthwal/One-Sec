@@ -22,15 +22,7 @@ import static android.content.ContentValues.TAG;
 public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.MyViewHolder> {
     private Context context;
     private ArrayList<HashMap<String, String>> mDataset;
-    private OnItemClickListener mOnItemClickListener;
 
-    public interface OnItemClickListener {
-        public void onItemClick(View view, int position);
-    }
-
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         public TextView albumName;
@@ -46,10 +38,9 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.MyVi
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public AlbumListAdapter(Context pContext, ArrayList<HashMap<String, String>> myDataset, OnItemClickListener onItemClickListener) {
+    public AlbumListAdapter(Context pContext, ArrayList<HashMap<String, String>> myDataset) {
         this.context = pContext;
         this.mDataset = myDataset;
-        this.mOnItemClickListener = onItemClickListener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -61,6 +52,7 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.MyVi
                 .inflate(R.layout.list_item, parent, false);
 
         MyViewHolder vh = new MyViewHolder(v);
+
         return vh;
     }
 
@@ -72,7 +64,8 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.MyVi
             holder.albumName.setText(currentItem.get("albumName"));
             holder.imgCount.setText("Images (" + currentItem.get("imageCount") + ")");
         }
-        holder.imageView.setOnClickListener(new View.OnClickListener() {
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick:  albumName" + position);

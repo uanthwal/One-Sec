@@ -36,6 +36,11 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int flag = 0;
+
+                if (editTextName.getText().toString().equals("")) {
+                    editTextName.setError("Please enter name");
+                    flag = -1;
+                }
                 if (editTextEmail.getText().toString().equals("")) {
                     editTextEmail.setError("Please enter email address");
                     flag = -1;
