@@ -2,6 +2,7 @@
 package com.mobilecomputing.one_sec.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.text.InputType;
@@ -42,12 +43,7 @@ public class PhotoVaultActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         albumLst = getAlbumList();
-        mAdapter = new AlbumListAdapter(getApplicationContext(), albumLst, new AlbumListAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                System.out.println(position);
-            }
-        });
+        mAdapter = new AlbumListAdapter(getApplicationContext(), albumLst);
         recyclerView.setAdapter(mAdapter);
         textViewNoAlbums = findViewById(R.id.noAlbumLbl);
         checkForAlbumCount();
@@ -143,5 +139,12 @@ public class PhotoVaultActivity extends AppCompatActivity {
         } else {
             textViewNoAlbums.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(PhotoVaultActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

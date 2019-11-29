@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mobilecomputing.one_sec.R;
 import com.mobilecomputing.one_sec.adapters.AlbumDetailsAdapter;
+import com.mobilecomputing.one_sec.adapters.AlbumListAdapter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -231,5 +232,11 @@ public class AlbumDetailActivity extends AppCompatActivity {
     private void updateImgCount() {
         if (null != imagesInAlbum)
             albumTitle.setText(albumName + " (" + imagesInAlbum.size() + ")");
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(AlbumDetailActivity.this, PhotoVaultActivity.class);
+        startActivity(intent);
     }
 }

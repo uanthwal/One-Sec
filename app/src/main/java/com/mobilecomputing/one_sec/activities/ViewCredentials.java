@@ -10,6 +10,7 @@ import android.transition.Explode;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -43,31 +44,22 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.viewcontents_layout);
         setTitle("Credentials");
-
-
-
-
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy =
                     new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
-        fab  = findViewById(R.id.fab);
-
+        fab = findViewById(R.id.fab);
         myDB = new DatabaseHelper(this);
         System.out.println("test0");
-
-//        ListView listView = findViewById(R.id.listView);
-
         final ArrayList<String> list = new ArrayList<>();
         final Cursor data = myDB.getListContents();
-
-        if(data.getCount() == 0){
-            Toast.makeText(ViewCredentials.this, "Database is empty", Toast.LENGTH_LONG).show();
-        }
-        else{
-            while(data.moveToNext()){
+        TextView noCredsLbl = findViewById(R.id.no_creds_lbl);
+        if (data.getCount() == 0) {
+            noCredsLbl.setVisibility(View.VISIBLE);
+        } else {
+            noCredsLbl.setVisibility(View.GONE);
+            while (data.moveToNext()) {
                 String name = data.getString(1);
                 String username = data.getString(2);
                 String password = data.getString(3);
@@ -78,11 +70,10 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
 //                favicon.execute(website);
 
                 String imageURL = getImageURL(website);
-                if (imageURL!="")
+                if (imageURL != "")
                     mImageUrls.add(imageURL);
                 else
                     System.out.println("Error retrieving image");
-
 
 
             }
@@ -113,16 +104,15 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
     }
 
 
-
     @Override
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
-    private String getImageURL(String name){
+    private String getImageURL(String name) {
 
-        try{
+        try {
             String url = "https://favicongrabber.com/api/grab/";
             url += name;
 //            System.out.println(url);
@@ -140,31 +130,30 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
             in.close();
 //            System.out.println(content);
             JSONObject myResponse = new JSONObject(content.toString());
-            JSONObject image = ((JSONArray)myResponse.get("icons")).getJSONObject(0);
+            JSONObject image = ((JSONArray) myResponse.get("icons")).getJSONObject(0);
             String imageURL = image.get("src").toString();
             return imageURL;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
     }
 
 
-    private void initRecyclerView(DatabaseHelper myDB){
+    private void initRecyclerView(DatabaseHelper myDB) {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(mNames, mImageUrls, this, myDB);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private class Favicon extends AsyncTask<String, Integer, String>{
+    private class Favicon extends AsyncTask<String, Integer, String> {
         @Override
         protected String doInBackground(String... strings) {
 
             String imageURL = getImageURL(strings[0]);
 //            Toast.makeText((), imageURL, Toast.LENGTH_SHORT).show();
-            System.out.println("imageurl "+ imageURL);
+            System.out.println("imageurl " + imageURL);
             return imageURL;
         }
 
@@ -174,9 +163,9 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
             mImageUrls.add(s);
         }
 
-        private String getImageURL(String name){
+        private String getImageURL(String name) {
 
-            try{
+            try {
                 String url = "https://favicongrabber.com/api/grab/";
                 url += name;
 //            System.out.println(url);
@@ -194,11 +183,10 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
                 in.close();
 //            System.out.println(content);
                 JSONObject myResponse = new JSONObject(content.toString());
-                JSONObject image = ((JSONArray)myResponse.get("icons")).getJSONObject(0);
+                JSONObject image = ((JSONArray) myResponse.get("icons")).getJSONObject(0);
                 String imageURL = image.get("src").toString();
                 return imageURL;
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return "";
