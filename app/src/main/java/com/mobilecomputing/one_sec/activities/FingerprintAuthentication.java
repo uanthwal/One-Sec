@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -37,6 +39,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.util.List;
+import java.util.Locale;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -102,6 +106,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                             System.out.println("latitude "+latitude+" longitude "+longitude);
                             double distance = distance(latitude, longitude,
                                     location.getLatitude(), location.getLongitude());
+                            System.out.println(addTrustedLocation);
                             System.out.println("distance is "+ distance);
                             if(!addTrustedLocation && distance < 500){
                                 Intent intent = new Intent();
@@ -139,6 +144,20 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                 if(loc == null){
                     loc = lastKnownLocation;
                 }
+                try{
+                    Geocoder myLocation = new Geocoder(getApplicationContext(), Locale.getDefault());
+                    List<Address> myList = myLocation.getFromLocation(loc.getLatitude(),loc.getLongitude(), 1);
+                    Address obj = myList.get(0);
+                    String add = obj.getAddressLine(0);
+                    add = add + "\n" + obj.getCountryName();
+                    add = add + "\n" + obj.getCountryCode();
+                    add = add + "\n" + obj.getLocality();
+                    System.out.println(add);
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
+
+
                 System.out.println("abc" + loc.getLongitude()+" "+loc.getLatitude());
                 latitude = loc.getLatitude();
                 longitude = loc.getLongitude();
@@ -146,7 +165,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                 editor.putFloat(trustedLatitude, (float) latitude);
                 editor.putFloat(trustedLongitude, (float) longitude);
                 editor.commit();
-                Toast.makeText(getApplicationContext(), "Authenticate to continue", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Authenticate with fingerprint to save trusted location", Toast.LENGTH_SHORT).show();
                 initFingerprint();
             }
         });
@@ -183,6 +202,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
         System.out.println("latitude "+latitude+" longitude "+longitude);
         double distance = distance(latitude, longitude,
                 location.getLatitude(), location.getLongitude());
+        System.out.println("zee "+ String.valueOf(addTrustedLocation));
         System.out.println("distance "+distance);
         if(!addTrustedLocation && distance < 5){
             Intent intent = new Intent();

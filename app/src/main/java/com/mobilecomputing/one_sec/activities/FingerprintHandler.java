@@ -53,6 +53,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
 
 
     public void onAuthenticationFailed() {
+        fingerprintImage.setImageResource(R.mipmap.fingerprint_fail);
         shakeImage();
         Toast.makeText(context, "Authentication failed", Toast.LENGTH_LONG).show();
     }
@@ -71,7 +72,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
 
     public void onAuthenticationSucceeded(
             FingerprintManager.AuthenticationResult result) {
-
+        fingerprintImage.setImageResource(R.mipmap.fingerprint_success);
         Toast.makeText(context, "Authentication success!", Toast.LENGTH_LONG).show();
         Intent intent = new Intent();
         intent.setClass(context, MainActivity.class);
