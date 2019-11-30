@@ -146,6 +146,8 @@
             android:name=".activities.SignupActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name="info.androidhive.sqlite.view.NotesActivity"/>
+
         <service android:name=".services.LoadAppListService" />
         <service android:name=".services.LockService" />
 

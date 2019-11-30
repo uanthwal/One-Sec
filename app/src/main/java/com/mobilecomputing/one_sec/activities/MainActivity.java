@@ -1,9 +1,11 @@
 package com.mobilecomputing.one_sec.activities;
+import info.androidhive.sqlite.view.NotesActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.transition.Explode;
 import android.view.View;
+
 
 import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
@@ -183,7 +185,7 @@ public class MainActivity extends AppCompatActivity
                     } else if (finalI == 3) {
                         Intent intent = new Intent(MainActivity.this, PhotoVaultActivity.class);
                         startActivity(intent);
-                    } else if (finalI == 5) {
+                    } else if (finalI == 4) {
                         Intent intent = new Intent(MainActivity.this, NotesActivity.class);
                         startActivity(intent);
                     }
