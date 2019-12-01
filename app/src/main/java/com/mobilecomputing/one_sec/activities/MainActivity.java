@@ -178,16 +178,20 @@ public class MainActivity extends AppCompatActivity
                     } else if (finalI == 1) {
                         Intent intent = new Intent(MainActivity.this, CreditCardActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } else if (finalI == 2) {
                         SpUtil.getInstance().getBoolean(AppConstants.LOCK_FROM_LOCK_MAIN_ACITVITY, true);
                         Intent intent = new Intent(MainActivity.this, SplashActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } else if (finalI == 3) {
                         Intent intent = new Intent(MainActivity.this, PhotoVaultActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } else if (finalI == 4) {
                         Intent intent = new Intent(MainActivity.this, NotesActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 }
             });

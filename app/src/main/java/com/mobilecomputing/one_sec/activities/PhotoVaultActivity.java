@@ -122,6 +122,12 @@ public class PhotoVaultActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
     private boolean checkIfFolderExists(File[] files) {
         boolean folderExisits = false;
         for (File f : files) {

@@ -70,6 +70,32 @@
             android:name=".activities.CreditCardActivity"
             android:label="Credit Card Activity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.Edit"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:label="Edit Activity"
+                android:value=".activities.CreditCardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.Detail"
+            android:label="Detail"
+            android:parentActivityName=".activities.CreditCardActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.CreditCardActivity" />
+        </activity>
+        <activity
+            android:name=".activities.AddCard"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.CreditCardActivity" />
+        </activity>
+
         <activity
             android:name=".activities.LoginCredentialsActivity"
             android:label="Credit Card Activity"

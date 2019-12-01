@@ -3,6 +3,10 @@
     <color name="colorPrimary">#0EB541</color>
     <color name="colorPrimaryLight">#CD0EB541</color>
     <color name="colorPrimaryDark">#00574B</color>
+
+
+    <color name="text_color">#000000</color>
+    <color name="btn_color">#69cac7</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#FFF</color>
