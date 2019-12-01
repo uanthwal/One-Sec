@@ -88,7 +88,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
         if(ActivityCompat.checkSelfPermission(FingerprintAuthentication.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             System.out.println("No permissions");
             requestPermissions(LOCATION_PERMS, 190);
-            return;
+//            return;
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
