@@ -23,6 +23,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".LockApplication"
@@ -33,6 +34,7 @@
         android:manageSpaceActivity=".activities.MainActivity"
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.FingerprintAuthentication"></activity>
 
@@ -41,7 +43,6 @@
             android:enabled="true"
             android:exported="true"
             android:label="RestartServiceWhenStopped" />
-
 
 
         <activity

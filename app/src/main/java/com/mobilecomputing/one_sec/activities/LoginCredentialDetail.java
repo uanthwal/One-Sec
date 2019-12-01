@@ -25,6 +25,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.button.MaterialButton;
 import com.mobilecomputing.one_sec.R;
 import com.squareup.picasso.Picasso;
@@ -230,7 +232,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         });
 
         try {
-            String url = "https://favicongrabber.com/api/grab/";
+            String url = "http://favicongrabber.com/api/grab/";
             url += getIntent().getStringExtra("WEBSITE");
             System.out.println(url);
             URL faviconURL = new URL(url);
@@ -247,6 +249,14 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             JSONObject myResponse = new JSONObject(content.toString());
             JSONObject image = ((JSONArray) myResponse.get("icons")).getJSONObject(0);
             String imageURL = image.get("src").toString();
+//            RequestOptions options = new RequestOptions()
+//                    .centerCrop()
+//                    .placeholder(R.mipmap.ic_launcher_round)
+//                    .error(R.mipmap.ic_launcher_round);
+
+
+
+//            Glide.with(this).load(imageURL).apply(options).into(imgFavicon);
             Picasso.get().load(imageURL).into(imgFavicon);
         } catch (Exception e) {
             e.printStackTrace();
