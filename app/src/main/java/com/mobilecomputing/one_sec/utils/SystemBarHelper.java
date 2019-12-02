@@ -210,7 +210,7 @@ public class SystemBarHelper {
     }
   }
 
-  //------------------------->
+
 
 
 
@@ -370,7 +370,7 @@ public class SystemBarHelper {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       ViewGroup.LayoutParams lp = view.getLayoutParams();
-      lp.height += getStatusBarHeight(context);//增高
+      lp.height += getStatusBarHeight(context);
       view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(context),
           view.getPaddingRight(), view.getPaddingBottom());
     }

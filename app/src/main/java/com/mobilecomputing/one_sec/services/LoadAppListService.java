@@ -115,7 +115,7 @@ public class LoadAppListService extends IntentService {
                 e.printStackTrace();
             }
         }
-        // Log.i("onHandleIntent", "time consuming = " + (System.currentTimeMillis() - time));
+
     }
 
     @Override
@@ -129,14 +129,14 @@ public class LoadAppListService extends IntentService {
         List<String> packageList = new ArrayList<>();
         List<FaviterInfo> faviterInfos = new ArrayList<>();
 
-        //android
+
         packageList.add("com.android.gallery3d");
         packageList.add("com.android.mms");
         packageList.add("com.android.contacts");
         packageList.add("com.android.email");
         packageList.add("com.android.vending");
-        //TODO:
-       // packageList.add("com.android.settings");
+
+
         packageList.add("com.android.dialer");
         packageList.add("com.android.camera");
         //......

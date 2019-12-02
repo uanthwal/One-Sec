@@ -42,12 +42,12 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         initAnimation();
 
-//        initFingerprint();
+
 
 
         setContentView(R.layout.activity_main);
 
-//        getLocation();
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
       toolbar.dismissPopupMenus();
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         } else {
             if (backButtonPressCount >= 1) {
 //                Intent intent = new Intent(Intent.ACTION_MAIN);
-//                intent.addCategory(Intent.CATEGORY_HOME);
+
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //                startActivity(intent);
             } else {

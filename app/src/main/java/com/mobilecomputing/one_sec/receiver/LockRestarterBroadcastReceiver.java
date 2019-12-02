@@ -18,14 +18,14 @@ public class LockRestarterBroadcastReceiver extends BroadcastReceiver {
         if (intent != null && lockState) {
             String type = intent.getStringExtra("type");
             if (type.contentEquals("lockservice"))
-                //context.startService(new Intent(context, LockService.class));
+
                 BackgroundManager.getInstance().init(context).startService(LockService.class);
 
             else if (type.contentEquals("startlockserviceFromAM")) {
                 if (!BackgroundManager.getInstance().init(context).isServiceRunning(LockService.class)) {
                     BackgroundManager.getInstance().init(context).startService(LockService.class);
                 }
-                //repeat
+
                 BackgroundManager.getInstance().init(context).startAlarmManager();
             }
         }

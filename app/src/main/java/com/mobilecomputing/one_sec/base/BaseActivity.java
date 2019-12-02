@@ -24,7 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
 
         initViews(savedInstanceState);
-//        initToolBar();
+
         initData();
         initAction();
     }

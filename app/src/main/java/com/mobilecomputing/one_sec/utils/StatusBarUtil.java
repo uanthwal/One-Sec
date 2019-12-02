@@ -76,7 +76,7 @@ public class StatusBarUtil {
         }
         transparentStatusBar(activity);
         ViewGroup contentView = activity.findViewById(android.R.id.content);
-        // 移除半透明矩形,以免叠加
+
         if (contentView.getChildCount() > 1) {
             contentView.getChildAt(1).setBackgroundColor(color);
         } else {
@@ -121,7 +121,7 @@ public class StatusBarUtil {
     @Deprecated
     public static void setTranslucentDiff(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // 设置状态栏透明
+
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             setRootView(activity);
         }
@@ -150,8 +150,8 @@ public class StatusBarUtil {
         } else {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
-        // 生成一个状态栏大小的矩形
-        // 添加 statusBarView 到布局中
+
+
         ViewGroup contentLayout = (ViewGroup) drawerLayout.getChildAt(0);
         if (contentLayout.getChildCount() > 0 && contentLayout.getChildAt(0) instanceof StatusBarView) {
             contentLayout.getChildAt(0).setBackgroundColor(color);
@@ -159,13 +159,13 @@ public class StatusBarUtil {
             StatusBarView statusBarView = createStatusBarView(activity, color);
             contentLayout.addView(statusBarView, 0);
         }
-        // 内容布局不是 LinearLayout 时,设置padding top
+
         if (!(contentLayout instanceof LinearLayout) && contentLayout.getChildAt(1) != null) {
             contentLayout.getChildAt(1)
                 .setPadding(contentLayout.getPaddingLeft(), getStatusBarHeight(activity) + contentLayout.getPaddingTop(),
                     contentLayout.getPaddingRight(), contentLayout.getPaddingBottom());
         }
-        // 设置属性
+
         setDrawerLayoutProperty(drawerLayout, contentLayout);
         addTranslucentView(activity, statusBarAlpha);
     }
@@ -184,20 +184,20 @@ public class StatusBarUtil {
     public static void setColorForDrawerLayoutDiff(@NonNull Activity activity, @NonNull DrawerLayout drawerLayout, @ColorInt int color) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            // 生成一个状态栏大小的矩形
+
             ViewGroup contentLayout = (ViewGroup) drawerLayout.getChildAt(0);
             if (contentLayout.getChildCount() > 0 && contentLayout.getChildAt(0) instanceof StatusBarView) {
                 contentLayout.getChildAt(0).setBackgroundColor(calculateStatusColor(color, DEFAULT_STATUS_BAR_ALPHA));
             } else {
-                // 添加 statusBarView 到布局中
+
                 StatusBarView statusBarView = createStatusBarView(activity, color);
                 contentLayout.addView(statusBarView, 0);
             }
-            // 内容布局不是 LinearLayout 时,设置padding top
+
             if (!(contentLayout instanceof LinearLayout) && contentLayout.getChildAt(1) != null) {
                 contentLayout.getChildAt(1).setPadding(0, getStatusBarHeight(activity), 0, 0);
             }
-            // 设置属性
+
             setDrawerLayoutProperty(drawerLayout, contentLayout);
         }
     }
@@ -231,12 +231,12 @@ public class StatusBarUtil {
         }
 
         ViewGroup contentLayout = (ViewGroup) drawerLayout.getChildAt(0);
-        // 内容布局不是 LinearLayout 时,设置padding top
+
         if (!(contentLayout instanceof LinearLayout) && contentLayout.getChildAt(1) != null) {
             contentLayout.getChildAt(1).setPadding(0, getStatusBarHeight(activity), 0, 0);
         }
 
-        // 设置属性
+
         setDrawerLayoutProperty(drawerLayout, contentLayout);
     }
 
@@ -244,16 +244,16 @@ public class StatusBarUtil {
     @Deprecated
     public static void setTranslucentForDrawerLayoutDiff(@NonNull Activity activity, @NonNull DrawerLayout drawerLayout) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            // 设置状态栏透明
+
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            // 设置内容布局属性
+
             ViewGroup contentLayout = (ViewGroup) drawerLayout.getChildAt(0);
             contentLayout.setFitsSystemWindows(true);
             contentLayout.setClipToPadding(true);
-            // 设置抽屉布局属性
+
             ViewGroup vg = (ViewGroup) drawerLayout.getChildAt(1);
             vg.setFitsSystemWindows(false);
-            // 设置 DrawerLayout 属性
+
             drawerLayout.setFitsSystemWindows(false);
         }
     }
@@ -300,7 +300,7 @@ public class StatusBarUtil {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////
+
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private static void clearPreviousSetting(Activity activity) {
@@ -326,7 +326,7 @@ public class StatusBarUtil {
 
     @NonNull
     private static StatusBarView createStatusBarView(@NonNull Activity activity, @ColorInt int color) {
-        // 绘制一个和状态栏一样高的矩形
+
         StatusBarView statusBarView = new StatusBarView(activity);
         LinearLayout.LayoutParams params =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));
@@ -338,7 +338,7 @@ public class StatusBarUtil {
 
     @NonNull
     private static StatusBarView createStatusBarView(@NonNull Activity activity, @ColorInt int color, int alpha) {
-        // 绘制一个和状态栏一样高的矩形
+
         StatusBarView statusBarView = new StatusBarView(activity);
         LinearLayout.LayoutParams params =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getStatusBarHeight(activity));

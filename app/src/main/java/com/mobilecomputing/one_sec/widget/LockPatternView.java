@@ -42,16 +42,16 @@ public class LockPatternView extends View {
     private int res_gesture_pattern_selected = R.drawable.gesture_pattern_selected;
     private int res_gesture_pattern_selected_wrong = R.drawable.gesture_pattern_selected_wrong;
 
-    // private boolean ishideline = false; //是否隐藏路径
+
 
     private static final String TAG = "LockPatternView";
-    // Aspect to use when rendering this view
-    private static final int ASPECT_SQUARE = 0; // View will be the minimum of
-    // width/height
-    private static final int ASPECT_LOCK_WIDTH = 1; // Fixed width; height will
-    // be minimum of (w,h)
-    private static final int ASPECT_LOCK_HEIGHT = 2;// Fixed height; width will
-    // be minimum of (w,h)
+
+    private static final int ASPECT_SQUARE = 0;
+
+    private static final int ASPECT_LOCK_WIDTH = 1;
+
+    private static final int ASPECT_LOCK_HEIGHT = 2;
+
 
     private static final boolean PROFILE_DRAWING = false;
     private boolean mDrawingProfilingStarted = false;
@@ -61,7 +61,7 @@ public class LockPatternView extends View {
     @NonNull
     private Paint mPathPaint = new Paint();
 
-    // TODO: make this common with PhoneWindow
+
     static final int STATUS_BAR_HEIGHT = 25;
 
 
@@ -87,7 +87,7 @@ public class LockPatternView extends View {
     private boolean mEnableHapticFeedback = true;
     private boolean mPatternInProgress = false;
 
-    private float mDiameterFactor = 0.10f; // TODO: move to attrs
+    private float mDiameterFactor = 0.10f;
     private final int mStrokeAlpha = 51;
     private float mHitFactor = 0.6f;
 
@@ -129,9 +129,9 @@ public class LockPatternView extends View {
         this.res_gesture_pattern_selected_wrong = resId;
     }
 
-//
-//    public void setIshideline(boolean ishideline) {
-//        this.ishideline = ishideline;
+
+
+
 //    }
 
 
@@ -139,7 +139,7 @@ public class LockPatternView extends View {
         int row;
         int column;
 
-        // keep # objects limited to 9
+
         @NonNull
         static Cell[][] sCells = new Cell[3][3];
 
@@ -245,7 +245,7 @@ public class LockPatternView extends View {
 
         mPathPaint.setAntiAlias(true);
         mPathPaint.setDither(true);
-        mPathPaint.setColor(line_color_right); // TODO this should be from the
+        mPathPaint.setColor(line_color_right);
         // style
         mPathPaint.setAlpha(mStrokeAlpha);
         mPathPaint.setStyle(Paint.Style.STROKE);

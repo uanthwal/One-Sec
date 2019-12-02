@@ -49,7 +49,7 @@ public class MainActivity_AppLock extends BaseActivity implements LockMainContra
     protected void initViews(Bundle savedInstanceState) {
         mBtnSetting = findViewById(R.id.btn_setting);
         mTopLayout = findViewById(R.id.top_layout);
-//        mTopLayout.setPadding(0, SystemBarHelper.getStatusBarHeight(this), 0, 0);
+
 
         mLockMainPresenter = new LockMainPresenter(this, this);
         mLockMainPresenter.loadAppInfo(this);
@@ -83,7 +83,7 @@ public class MainActivity_AppLock extends BaseActivity implements LockMainContra
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_ACTION_IGNORE_BATTERY_OPTIMIZATION) {
-            // do nothing::  make this required
+
         }
     }
 

@@ -114,7 +114,7 @@ public class LockMainPresenter implements LockMainContract.Presenter {
                 try {
                     ApplicationInfo appInfo = mPackageManager.getApplicationInfo(info.getPackageName(), PackageManager.GET_UNINSTALLED_PACKAGES);
                     if (appInfo == null || mPackageManager.getApplicationIcon(appInfo) == null) {
-                        infoIterator.remove(); //将有错的app移除
+                        infoIterator.remove();
                     } else {
                         info.setAppInfo(appInfo);
                         if ((appInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) {

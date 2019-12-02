@@ -25,9 +25,9 @@ public class LockApplication extends LitePalApplication {
     public void onCreate() {
         super.onCreate();
         application = this;
-//        TooLargeTool.startLogging(this);
-        //Crash reporter utility
-       // CrashReporter.initialize(this, getCacheDir().getPath());
+
+
+
 
         SpUtil.getInstance().init(application);
         activityList = new ArrayList<>();

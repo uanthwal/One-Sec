@@ -19,7 +19,7 @@ public class AppDbHandler extends SQLiteOpenHelper {
     public static final String COLUMN_MOB_NUM = "mob_num";
     public static final String COLUMN_EMAIL = "email";
 
-    //We need to pass database information along to superclass
+
     public AppDbHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
@@ -58,7 +58,7 @@ public class AppDbHandler extends SQLiteOpenHelper {
     public LoginInfo authenticateUser(String email, String password) {
         LoginInfo loginInfo = new LoginInfo();
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_LOGIN + " WHERE " + COLUMN_EMAIL + " = '" + email + "' AND " + COLUMN_PASSWORD + " = '" + password + "'";// why not leave out the WHERE  clause?
+        String query = "SELECT * FROM " + TABLE_LOGIN + " WHERE " + COLUMN_EMAIL + " = '" + email + "' AND " + COLUMN_PASSWORD + " = '" + password + "'";
         Cursor recordSet = db.rawQuery(query, null);
         recordSet.moveToFirst();
         if (recordSet.getCount() == 1) {
@@ -74,7 +74,7 @@ public class AppDbHandler extends SQLiteOpenHelper {
     public int checkIfUserExists(String email) {
         LoginInfo loginInfo = new LoginInfo();
         SQLiteDatabase db = getWritableDatabase();
-        String query = "SELECT * FROM " + TABLE_LOGIN + " WHERE " + COLUMN_EMAIL + " = '" + email+ "'";// why not leave out the WHERE  clause?
+        String query = "SELECT * FROM " + TABLE_LOGIN + " WHERE " + COLUMN_EMAIL + " = '" + email+ "'";
         Cursor recordSet = db.rawQuery(query, null);
         recordSet.moveToFirst();
         int flag = -1;

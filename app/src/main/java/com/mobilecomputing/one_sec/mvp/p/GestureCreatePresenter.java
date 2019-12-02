@@ -32,18 +32,18 @@ public class GestureCreatePresenter implements GestureCreateContract.Presenter {
 
     @Override
     public void updateStage(@NonNull LockStage stage) {
-        mView.updateUiStage(stage); //更新UiStage
-        if (stage == ChoiceTooShort) { //如果少于4个点
+        mView.updateUiStage(stage);
+        if (stage == ChoiceTooShort) {
             mView.updateLockTip(mContext.getResources().getString(stage.headerMessage, LockPatternUtils.MIN_LOCK_PATTERN_SIZE), true);
         } else {
             if (stage.headerMessage == R.string.lock_need_to_unlock_wrong) {
                 mView.updateLockTip(mContext.getResources().getString(R.string.lock_need_to_unlock_wrong), true);
                 mView.setHeaderMessage(R.string.lock_recording_intro_header);
             } else {
-                mView.setHeaderMessage(stage.headerMessage); //
+                mView.setHeaderMessage(stage.headerMessage);
             }
         }
-        // same for whether the patten is enabled
+
         mView.lockPatternViewConfiguration(stage.patternEnabled, LockPatternView.DisplayMode.Correct);
 
         switch (stage) {

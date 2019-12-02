@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        System.out.println("onCreate test");
+
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " NAME TEXT, USERNAME TEXT, PASSWORD TEXT, WEBSITE TEXT, SECRETKEY TEXT)";
         System.out.println("query is " + createTable);
@@ -68,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
     public Cursor getListValue(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         String sqlQuery = "SELECT * FROM " + TABLE_NAME + " WHERE NAME=\""+name+ "\"";
-//        System.out.println(sqlQuery);
+
         Cursor data = db.rawQuery(sqlQuery, null);
         return data;
     }

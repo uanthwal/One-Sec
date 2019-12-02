@@ -24,7 +24,7 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.MyVi
     private ArrayList<HashMap<String, String>> mDataset;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+
         public TextView albumName;
         public TextView imgCount;
         public ImageView imageView;
@@ -37,17 +37,17 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.MyVi
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
+
     public AlbumListAdapter(Context pContext, ArrayList<HashMap<String, String>> myDataset) {
         this.context = pContext;
         this.mDataset = myDataset;
     }
 
-    // Create new views (invoked by the layout manager)
+
     @Override
     public AlbumListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                             int viewType) {
-        // create a new view
+
         View v = (View) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item, parent, false);
 
@@ -56,7 +56,7 @@ public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.MyVi
         return vh;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         if (null != mDataset && mDataset.size() > 0) {
