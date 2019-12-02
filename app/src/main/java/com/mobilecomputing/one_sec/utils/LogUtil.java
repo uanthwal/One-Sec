@@ -2,9 +2,7 @@ package com.mobilecomputing.one_sec.utils;
 
 import android.util.Log;
 
-/**
- * Created by xian on 2017/2/17.
- */
+
 
 public class LogUtil {
     private static final String TAG = "LogUtil";

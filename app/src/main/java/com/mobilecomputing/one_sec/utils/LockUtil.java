@@ -28,17 +28,10 @@ import com.mobilecomputing.one_sec.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by xian on 2017/2/17.
- */
+
 
 public class LockUtil {
-    /**
-     *
-     *
-     * @param context
-     * @return
-     */
+
     public static boolean isStatAccessPermissionSet(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             try {
@@ -56,11 +49,7 @@ public class LockUtil {
         }
     }
 
-    /**
-     * 
-     *
-     * @return
-     */
+
     public static boolean isNoOption(@NonNull Context context) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             PackageManager packageManager = context.getPackageManager();
@@ -71,8 +60,7 @@ public class LockUtil {
         return false;
     }
 
-    /**
-     */
+
     private static final String ENABLED_NOTIFICATION_LISTENERS = "enabled_notification_listeners";
 
     public static boolean isNotificationSettingOn(Context mContext) {
@@ -173,9 +161,7 @@ public class LockUtil {
         return bmp;
     }
 
-    /**
-     * Home
-     */
+
     public static void goHome(BaseActivity activity) {
         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
         homeIntent.addCategory(Intent.CATEGORY_HOME);

@@ -1,19 +1,4 @@
-/*******************************************************************************
- * Copyright (c) 2015 btows.com.
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- ******************************************************************************/
+
 package com.mobilecomputing.one_sec.utils;
 
 import android.content.Context;
@@ -37,25 +22,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 
 public class LockPatternUtils {
-    /**
-     * The minimum number of dots in a valid pattern.
-     */
+
     public static final int MIN_LOCK_PATTERN_SIZE = 4;
-    /**
-     * The maximum number of incorrect attempts before the user is prevented
-     * from trying again for {@link #FAILED_ATTEMPT_TIMEOUT_MS}.
-     */
+
     public static final int FAILED_ATTEMPTS_BEFORE_TIMEOUT = 4;
-    /**
-     * The minimum number of dots the user must include in a wrong pattern
-     * attempt for it to be counted against the counts that affect
-     * {@link #FAILED_ATTEMPTS_BEFORE_TIMEOUT} and
-     */
+
     public static final int MIN_PATTERN_REGISTER_FAIL = MIN_LOCK_PATTERN_SIZE;
-    /**
-     * How long the user is prevented from trying again after entering the wrong
-     * pattern too many times.
-     */
+
     public static final long FAILED_ATTEMPT_TIMEOUT_MS = 30000L;
     private static final String TAG = "LockPatternUtils";
     private static final String LOCK_PATTERN_FILE = "gesture.key";
@@ -74,12 +47,7 @@ public class LockPatternUtils {
         }
     }
 
-    /**
-     * Deserialize a pattern. 解密,用于保存状态
-     *
-     * @param string The pattern serialized with {@link #patternToString}
-     * @return The pattern.
-     */
+
     @NonNull
     public static List<LockPatternView.Cell> stringToPattern(String string) {
         List<LockPatternView.Cell> result = new ArrayList<LockPatternView.Cell>();
@@ -92,12 +60,7 @@ public class LockPatternUtils {
         return result;
     }
 
-    /**
-     * Serialize a pattern. 加密
-     *
-     * @param pattern The pattern.
-     * @return The pattern in string form.
-     */
+
     public static String patternToString(@Nullable List<LockPatternView.Cell> pattern) {
         if (pattern == null) {
             return "";
@@ -112,15 +75,7 @@ public class LockPatternUtils {
         return new String(res);
     }
 
-    /*
-     * Generate an SHA-1 hash for the pattern. Not the most secure, but it is at
-     * least a second level of protection. First level is that the file is in a
-     * location only readable by the system process.
-     *
-     * @param pattern the gesture pattern.
-     *
-     * @return the hash of the pattern in a byte array.
-     */
+
     @Nullable
     private static byte[] patternToHash(@Nullable List<LockPatternView.Cell> pattern) {
         if (pattern == null) {
@@ -142,11 +97,7 @@ public class LockPatternUtils {
         }
     }
 
-    /**
-     * Check to see if the user has stored a lock pattern.
-     *
-     * @return Whether a saved pattern exists.
-     */
+
     public boolean savedPatternExists() {
         return sHaveNonZeroPatternFile.get();
     }
@@ -155,11 +106,7 @@ public class LockPatternUtils {
         saveLockPattern(null);
     }
 
-    /**
-     * Save a lock pattern.
-     *
-     * @param pattern The new pattern to save.
-     */
+
     public void saveLockPattern(@Nullable List<LockPatternView.Cell> pattern) {
         // Compute the hash
         final byte[] hash = LockPatternUtils.patternToHash(pattern);
@@ -183,13 +130,7 @@ public class LockPatternUtils {
         }
     }
 
-    /**
-     * Check to see if a pattern matches the saved pattern. If no pattern
-     * exists, always returns true.
-     *
-     * @param pattern The pattern to check.
-     * @return Whether the pattern matches the stored one.
-     */
+
     public boolean checkPattern(List<LockPatternView.Cell> pattern) {
         try {
             // Read all the bytes from the file

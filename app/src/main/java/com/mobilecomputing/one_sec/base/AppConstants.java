@@ -3,9 +3,7 @@ package com.mobilecomputing.one_sec.base;
 
 import com.mobilecomputing.one_sec.BuildConfig;
 
-/**
- * Created by xian on 2017/2/17.
- */
+
 
 public class AppConstants {
 

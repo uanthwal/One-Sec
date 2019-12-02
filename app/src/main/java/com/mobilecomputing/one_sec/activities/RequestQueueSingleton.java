@@ -1,9 +1,6 @@
 package com.mobilecomputing.one_sec.activities;
 
-/**
- * @author Avinash Gazula
- * @date Nov. 23, 2019
- */
+
 
 
 import android.content.Context;

@@ -4,9 +4,7 @@ package com.mobilecomputing.one_sec.model;
 import com.mobilecomputing.one_sec.R;
 
 
-/**
- * Created by lzx on 2017/1/8.
- */
+
 
 public enum LockStage {
     Introduction(R.string.lock_recording_intro_header, -1, true),
@@ -26,11 +24,7 @@ public enum LockStage {
     public final int headerMessage;
     public final int footerMessage;
     public final boolean patternEnabled;
-    /**
-     * @param headerMessage  The message displayed at the top.
-     * @param footerMessage  The footer message.
-     * @param patternEnabled Whether the pattern widget is enabled.
-     */
+
     LockStage(int headerMessage, int footerMessage,
               boolean patternEnabled) {
         this.headerMessage = headerMessage;

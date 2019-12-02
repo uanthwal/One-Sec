@@ -3,9 +3,7 @@ package com.mobilecomputing.one_sec.utils;
 import android.view.Window;
 import android.view.WindowManager;
 
-/**
- * Created by xian on 2017/2/17.
- */
+
 
 public class AppUtils {
 

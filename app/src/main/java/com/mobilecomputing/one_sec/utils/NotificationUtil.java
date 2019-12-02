@@ -24,7 +24,7 @@ public class NotificationUtil {
     public static void createNotification(Service mContext,String title, String message) {
         Intent resultIntent = new Intent(mContext, com.mobilecomputing.one_sec.activities.MainActivity_AppLock.class);
         resultIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, 112 /* Request code */, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(mContext, 112 , resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
 

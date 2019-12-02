@@ -29,9 +29,7 @@ public class LockMainPresenter implements LockMainContract.Presenter {
         mLockInfoManager = new CommLockInfoManager(mContext);
     }
 
-    /**
-     * 加载所有app
-     */
+
     @Override
     public void loadAppInfo(Context context) {
         mLoadAppInfo = new LoadAppInfo();
