@@ -43,7 +43,15 @@ public class QRScanner extends AppCompatActivity {
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
+                if(ActivityCompat.checkSelfPermission(QRScanner.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+                    System.out.println("No permissions");
+                    ActivityCompat
+                            .requestPermissions(
+                                    QRScanner.this,
+                                    new String[] { Manifest.permission.CAMERA },
+                                    1234);
 
+                }
                 try{
                     cameraSource.start(surfaceHolder);
                 }catch (Exception e){

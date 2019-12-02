@@ -191,15 +191,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                     if(event.getRawX() >= (txtValue2FAKey.getRight() - txtValue2FAKey.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         // your action here
 //                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
-                        if(ActivityCompat.checkSelfPermission(LoginCredentialDetail.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-                            System.out.println("No permissions");
-                            ActivityCompat
-                                    .requestPermissions(
-                                            LoginCredentialDetail.this,
-                                            new String[] { Manifest.permission.CAMERA },
-                                            1234);
 
-                        }
 
 
                         Intent intent = new Intent();
