@@ -36,7 +36,7 @@
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="36dp"
-            android:src="@mipmap/fingerprint" />
+            android:src="@mipmap/fp_default" />
 
         <TextView
             android:id="@+id/textView2"

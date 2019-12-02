@@ -19,6 +19,8 @@ import androidx.core.app.ActivityCompat;
 
 import com.mobilecomputing.one_sec.R;
 
+import java.util.concurrent.TimeUnit;
+
 @TargetApi(Build.VERSION_CODES.M)
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
 
@@ -53,7 +55,7 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
 
 
     public void onAuthenticationFailed() {
-        fingerprintImage.setImageResource(R.mipmap.fingerprint_fail);
+        fingerprintImage.setImageResource(R.mipmap.fp_fail);
         shakeImage();
         Toast.makeText(context, "Authentication failed", Toast.LENGTH_LONG).show();
     }
@@ -62,6 +64,25 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         Animation shake;
         shake = AnimationUtils.loadAnimation(context, R.anim.linear_interpolator);
         fingerprintImage.startAnimation(shake);
+        shake.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                fingerprintImage.setImageResource(R.mipmap.fp_default);
+                Animation fade_in;
+                fade_in = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+                fingerprintImage.startAnimation(fade_in);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
     @Override
@@ -72,12 +93,52 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
 
     public void onAuthenticationSucceeded(
             FingerprintManager.AuthenticationResult result) {
-        fingerprintImage.setImageResource(R.mipmap.fingerprint_success);
-        Toast.makeText(context, "Authentication success!", Toast.LENGTH_LONG).show();
-        Intent intent = new Intent();
-        intent.setClass(context, MainActivity.class);
-        context.startActivity(intent);
-        ((Activity) context).finish();
+        fingerprintImage.setImageResource(R.mipmap.fp_succes);
+        Animation fade_out;
+        fade_out = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+        fingerprintImage.startAnimation(fade_out);
+        fade_out.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                fingerprintImage.setImageResource(R.mipmap.fp_accepted);
+                Animation fade_in;
+                fade_in = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+                fingerprintImage.startAnimation(fade_in);
+                fade_in.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        Toast.makeText(context, "Authentication success!", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent();
+                        intent.setClass(context, MainActivity.class);
+
+                        context.startActivity(intent);
+                        ((Activity) context).finish();
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
     }
 
 }
