@@ -1,7 +1,11 @@
 package com.mobilecomputing.one_sec.activities;
 
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -24,6 +28,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -60,6 +65,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     private TextView txtGeneratedPassword;
     private SeekBar seekPasswordLength;
     private Button btnUsePassword;
+    Dialog deleteDialog;
 
     TextInputLayout txtName;
     TextInputLayout txtUsername;
@@ -76,13 +82,42 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     private int itemID;
     Handler handler2FA;
 
+    Button btnDeleteConfirm;
+    Button btnDeleteCancel;
 
+
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logindetails_layout);
         setTitle("Login");
         initAnimation();
+
+        deleteDialog = new Dialog(LoginCredentialDetail.this);
+        deleteDialog.setContentView(R.layout.delete_popup);
+        btnDeleteConfirm = deleteDialog.findViewById(R.id.btnDeleteConfirm);
+        btnDeleteCancel = deleteDialog.findViewById(R.id.btnDeleteCancel);
+
+        btnDeleteConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myDB.deleteCredential(txtValueName.getText().toString());
+                Toast.makeText(getApplicationContext(), "Login deleted", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(), ViewCredentials.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        btnDeleteCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteDialog.hide();
+            }
+        });
+
 
         cryptography = Cryptography.getInstance();
 
@@ -156,6 +191,17 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                     if(event.getRawX() >= (txtValue2FAKey.getRight() - txtValue2FAKey.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
                         // your action here
 //                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
+                        if(ActivityCompat.checkSelfPermission(LoginCredentialDetail.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+                            System.out.println("No permissions");
+                            ActivityCompat
+                                    .requestPermissions(
+                                            LoginCredentialDetail.this,
+                                            new String[] { Manifest.permission.CAMERA },
+                                            1234);
+
+                        }
+
+
                         Intent intent = new Intent();
                         intent.setClass(LoginCredentialDetail.this, QRScanner.class);
                         intent.putExtra("NAME", txtValueName.getText().toString());
@@ -265,6 +311,14 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent();
+        intent.setClass(this, ViewCredentials.class);
+        finish();
     }
 
     private void initAnimation() {
@@ -384,12 +438,13 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         }
 
         else if (id == R.id.delete_item) {
-            myDB.deleteCredential(txtValueName.getText().toString());
-            Toast.makeText(getApplicationContext(), "Login deleted", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent();
-            intent.setClass(getApplicationContext(), ViewCredentials.class);
-            startActivity(intent);
-            finish();
+            deleteDialog.show();
+//            myDB.deleteCredential(txtValueName.getText().toString());
+//            Toast.makeText(getApplicationContext(), "Login deleted", Toast.LENGTH_SHORT).show();
+//            Intent intent = new Intent();
+//            intent.setClass(getApplicationContext(), ViewCredentials.class);
+//            startActivity(intent);
+//            finish();
         }
 
         return super.onOptionsItemSelected(item);

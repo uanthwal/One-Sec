@@ -102,8 +102,14 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
         });
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent();
+        intent.setClass(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     public void finish() {

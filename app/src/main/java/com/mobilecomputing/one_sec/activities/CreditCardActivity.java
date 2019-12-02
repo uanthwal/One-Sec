@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mobilecomputing.one_sec.R;
 
 import java.util.List;
@@ -24,11 +25,13 @@ public class CreditCardActivity extends AppCompatActivity {
     Adapter adapter;
     TextView noItemText;
     SimpleDatabase simpleDatabase;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credit_card_activity);
+        fab = findViewById(R.id.fab);
         toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Credit/Debit Card Storage");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
@@ -44,6 +47,14 @@ public class CreditCardActivity extends AppCompatActivity {
             noItemText.setVisibility(View.GONE);
             displayList(allCards);
         }
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(CreditCardActivity.this, AddCard.class);
+                startActivity(i);
+            }
+        });
 
     }
 

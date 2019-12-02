@@ -83,4 +83,12 @@
     <style name="TextAppearance.App.TextInputLayout" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/font_deep_gray</item>
     </style>
+    
+    <style name="AppTheme.SplashScreen" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+
 </resources>
