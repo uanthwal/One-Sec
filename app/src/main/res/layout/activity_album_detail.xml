@@ -12,11 +12,11 @@
 
         <TextView
             android:id="@+id/album_title"
-            android:gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="13dp"
+            android:gravity="center_vertical"
             android:text="Album (0)"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -34,8 +34,8 @@
         android:id="@+id/fab_add_images"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:tint="@android:color/white"
@@ -48,8 +48,8 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_gravity="center"
-        android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="No Images added. Click (+) button to add images." />
 
 </RelativeLayout>

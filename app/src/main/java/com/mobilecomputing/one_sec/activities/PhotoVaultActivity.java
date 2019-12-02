@@ -150,7 +150,7 @@ public class PhotoVaultActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(PhotoVaultActivity.this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 }

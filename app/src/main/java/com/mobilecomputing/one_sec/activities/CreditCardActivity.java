@@ -30,7 +30,7 @@ public class CreditCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.credit_card_activity);
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("One-Sec Credit Card Storage");
+        toolbar.setTitle("Credit/Debit Card Storage");
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         setSupportActionBar(toolbar);
         noItemText = findViewById(R.id.noItemText);

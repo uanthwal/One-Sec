@@ -29,9 +29,8 @@ public class Detail extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-
         Intent i = getIntent();
-        id = i.getLongExtra("ID",0);
+        id = i.getLongExtra("ID", 0);
         SimpleDatabase db = new SimpleDatabase(this);
         Card card = db.getNote(id);
         getSupportActionBar().setTitle(card.getTitle());
@@ -61,27 +60,20 @@ public class Detail extends AppCompatActivity {
             public void onClick(View view) {
                 SimpleDatabase db = new SimpleDatabase(getApplicationContext());
                 db.deleteNote(id);
-                Toast.makeText(getApplicationContext(),"card Deleted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Card deleted successfully", Toast.LENGTH_LONG).show();
                 goToMain();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final String cardnum1 = card.getCardnum();
-        if(cardnum1.startsWith("1")|| cardnum1.startsWith("4"))
-        {
+        if (cardnum1.startsWith("1") || cardnum1.startsWith("4")) {
             imageicon.setImageResource(R.drawable.visa);
-        }
-        else if(cardnum1.startsWith("2")|| cardnum1.startsWith("5"))
-        {
+        } else if (cardnum1.startsWith("2") || cardnum1.startsWith("5")) {
             imageicon.setImageResource(R.drawable.mastercard);
-        }
-        else if(cardnum1.startsWith("3")||cardnum1.startsWith("6"))
-        {
+        } else if (cardnum1.startsWith("3") || cardnum1.startsWith("6")) {
             imageicon.setImageResource(R.drawable.american_express);
-        }
-        else
-        {
+        } else {
             imageicon.setImageResource(R.drawable.maestro);
         }
     }
@@ -89,15 +81,15 @@ public class Detail extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.edit_menu2,menu);
+        inflater.inflate(R.menu.edit_menu2, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.edit){
-            Intent i = new Intent(this,Edit.class);
-            i.putExtra("ID",id);
+        if (item.getItemId() == R.id.edit) {
+            Intent i = new Intent(this, Edit.class);
+            i.putExtra("ID", id);
             startActivity(i);
 
         }
@@ -110,7 +102,7 @@ public class Detail extends AppCompatActivity {
     }
 
     private void goToMain() {
-        Intent i = new Intent(this,CreditCardActivity.class);
+        Intent i = new Intent(this, CreditCardActivity.class);
         startActivity(i);
     }
 }

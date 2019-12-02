@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class DatabaseHelper extends SQLiteOpenHelper implements Serializable {
 
     public static final String DATABASE_NAME = "onesec.db";
-    public static final String TABLE_NAME = "login_credentials";
+    public static final String TABLE_NAME = "credentials";
     public static final String COL1 = "ID";
     public static final String COL2 = "NAME";
     public static final String COL3 = "USERNAME";
