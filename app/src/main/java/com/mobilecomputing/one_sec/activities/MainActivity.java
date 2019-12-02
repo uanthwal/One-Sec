@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity
 //        getLocation();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+      toolbar.dismissPopupMenus();
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -80,10 +81,10 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if (backButtonPressCount >= 1) {
-                Intent intent = new Intent(Intent.ACTION_MAIN);
-                intent.addCategory(Intent.CATEGORY_HOME);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+//                Intent intent = new Intent(Intent.ACTION_MAIN);
+//                intent.addCategory(Intent.CATEGORY_HOME);
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
             } else {
                 Toast.makeText(this, "Press the back button once again to exit.", Toast.LENGTH_SHORT).show();
                 backButtonPressCount++;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+//        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -122,8 +123,6 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_profile) {
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
-        } else if (id == R.id.nav_settings) {
-
         } else if (id == R.id.nav_contact) {
             Intent intent = new Intent(MainActivity.this, ContactUsActivity.class);
             startActivity(intent);

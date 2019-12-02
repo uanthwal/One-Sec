@@ -136,9 +136,6 @@ public class Edit extends AppCompatActivity {
             Log.d("EDITED", "EDIT: id " + id);
             goToMain();
             Toast.makeText(this, "card Edited.", Toast.LENGTH_SHORT).show();
-        }else if(item.getItemId() == R.id.delete){
-            Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
-            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

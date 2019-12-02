@@ -41,9 +41,9 @@ public class CreditCardActivity extends AppCompatActivity {
         List<Card> allCards = simpleDatabase.getAllNotes();
         recyclerView = findViewById(R.id.allNotesList);
 
-        if(allCards.isEmpty()){
+        if (allCards.isEmpty()) {
             noItemText.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             noItemText.setVisibility(View.GONE);
             displayList(allCards);
         }
@@ -73,13 +73,13 @@ public class CreditCardActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu,menu);
+//        inflater.inflate(R.menu.main_menu,menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.add){
+        if (item.getItemId() == R.id.add) {
             Toast.makeText(this, "Add New card", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, AddCard.class);
             startActivity(i);
@@ -91,14 +91,20 @@ public class CreditCardActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         List<Card> getAllCards = simpleDatabase.getAllNotes();
-        if(getAllCards.isEmpty()){
+        if (getAllCards.isEmpty()) {
             noItemText.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             noItemText.setVisibility(View.GONE);
             displayList(getAllCards);
         }
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(CreditCardActivity.this, MainActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
 }

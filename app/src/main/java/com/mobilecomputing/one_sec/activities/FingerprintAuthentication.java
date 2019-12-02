@@ -2,6 +2,7 @@ package com.mobilecomputing.one_sec.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.KeyguardManager;
@@ -85,10 +86,17 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
         sharedpreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
 
-        if(ActivityCompat.checkSelfPermission(FingerprintAuthentication.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            System.out.println("No permissions");
-            requestPermissions(LOCATION_PERMS, 190);
-//            return;
+//        if(ActivityCompat.checkSelfPermission(FingerprintAuthentication.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+//            System.out.println("No permissions");
+//            requestPermissions(LOCATION_PERMS, 190);
+////            return;
+//        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && (ContextCompat.checkSelfPermission(getApplicationContext(), ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(FingerprintAuthentication.this, LOCATION_PERMS,
+                    190);
+            return;
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -181,9 +189,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
             System.out.println("No permissions");
             requestPermissions(LOCATION_PERMS, 190);
         }
-        if(ActivityCompat.checkSelfPermission(FingerprintAuthentication.this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
     }
 

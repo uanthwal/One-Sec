@@ -123,9 +123,6 @@ public class AddCard extends AppCompatActivity {
                 noteTitle.setError("Title Can not be Blank.");
             }
 
-        } else if (item.getItemId() == R.id.delete) {
-            Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
-            onBackPressed();
         }
         return super.onOptionsItemSelected(item);
     }

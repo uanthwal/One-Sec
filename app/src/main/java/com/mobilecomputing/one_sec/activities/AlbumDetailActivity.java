@@ -27,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mobilecomputing.one_sec.R;
 import com.mobilecomputing.one_sec.adapters.AlbumDetailsAdapter;
-import com.mobilecomputing.one_sec.adapters.AlbumListAdapter;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -139,7 +138,6 @@ public class AlbumDetailActivity extends AppCompatActivity {
                         }
                     }
                     imagesInAlbum.addAll(selectedImages);
-
                     mAdapter.notifyDataSetChanged();
                 } else if (data.getData() != null) {
                     resolver.takePersistableUriPermission(data.getData(), takeFlags);
@@ -156,6 +154,7 @@ public class AlbumDetailActivity extends AppCompatActivity {
                     imagesInAlbum.add(destFile);
                     mAdapter.notifyDataSetChanged();
                 }
+                checkForImgCount();
                 updateImgCount();
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {

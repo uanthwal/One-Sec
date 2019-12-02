@@ -11,9 +11,6 @@ import java.util.List;
 
 import info.androidhive.sqlite.database.model.Note;
 
-/**
- * Created by ravi on 15/03/18.
- */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
