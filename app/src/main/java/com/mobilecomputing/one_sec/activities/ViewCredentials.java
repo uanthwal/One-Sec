@@ -96,21 +96,13 @@ public class ViewCredentials extends AppCompatActivity implements Serializable {
                 Intent intent = new Intent();
                 intent.setClass(ViewCredentials.this, AddCredential.class);
                 startActivity(intent);
-                finish();
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                finish();
             }
         });
     }
 
-    private void initAnimation() {
-//        Explode enterTransition = new Explode();
-//        enterTransition.setDuration(500);
-//        getWindow().setEnterTransition(enterTransition);
 
-        Slide enterTransition = new Slide();
-        enterTransition.setSlideEdge(Gravity.RIGHT);
-        enterTransition.setDuration(500);
-        getWindow().setEnterTransition(enterTransition);
-    }
 
 
     @Override

@@ -128,7 +128,7 @@
     <string name="show_pattern">Show pattern</string>
     <string name="hide_pattern">Hide pattern</string>
     <string name="about_me">About Me</string>
-    <string name="go_to_give_permission">Permit Permission</string>
+    <string name="go_to_give_permission">Grant Permission</string>
     <string name="warning">Warning</string>
     <string name="search_applications">Search Apps&#8230;</string>
     <string name="search_for">Search For&#8230;</string>

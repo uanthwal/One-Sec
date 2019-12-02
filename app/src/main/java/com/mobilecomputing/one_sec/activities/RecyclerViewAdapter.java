@@ -103,7 +103,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 //                        pairs[1] = new Pair<View, String>(holder.imageName, ViewCompat.getTransitionName(holder.imageName));
                         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(((Activity) mContext), pairs);
                         mContext.startActivity(intent, options.toBundle());
-//                        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                        ((Activity) mContext).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
 //                        ((Activity) mContext).finish();
 

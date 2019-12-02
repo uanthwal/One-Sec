@@ -116,7 +116,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                             }
                         }
                         else{
-                            System.out.println("No last known loaction");
+                            System.out.println("No last known location");
                         }
                     }
                 });

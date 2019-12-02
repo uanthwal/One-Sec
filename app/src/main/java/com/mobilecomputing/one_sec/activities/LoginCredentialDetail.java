@@ -28,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.mobilecomputing.one_sec.R;
 import com.squareup.picasso.Picasso;
 
@@ -60,6 +61,12 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     private SeekBar seekPasswordLength;
     private Button btnUsePassword;
 
+    TextInputLayout txtName;
+    TextInputLayout txtUsername;
+    TextInputLayout txtPassword;
+    TextInputLayout txtWebsite;
+    TextInputLayout txt2FAKey;
+
     Drawable originalDrawable;
     KeyListener originalListener;
     DatabaseHelper myDB;
@@ -85,6 +92,12 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             StrictMode.setThreadPolicy(policy);
         }
 
+        txtName = findViewById(R.id.txtName);
+        txtUsername = findViewById(R.id.txtUsername);
+        txtPassword = findViewById(R.id.txtPassword);
+        txtWebsite = findViewById(R.id.txtWebsite);
+        txt2FAKey = findViewById(R.id.txt2FAKey);
+
         txtValueName = findViewById(R.id.txtValueName);
         txtValueUsername = findViewById(R.id.txtValueUsername);
         txtValuePassword = findViewById(R.id.txtValuePassword);
@@ -109,11 +122,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 
         originalListener = txtValueName.getKeyListener();
         originalDrawable = txtValueName.getBackground();
-        disableEditText(txtValueName);
-        disableEditText(txtValueUsername);
-        disableEditText(txtValuePassword);
-        disableEditText(txtValueWebsite);
-        disableEditText(txtValue2FAKey);
+        disableEditText();
 
         String name = getIntent().getStringExtra("NAME");
         txtValueName.setText(name);
@@ -176,10 +185,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 String secretkey = txtValue2FAKey.getText().toString();
                 myDB.updateCredentials(itemID, name, username, password, website, secretkey);
                 Toast.makeText(getApplicationContext(), "Details updated", Toast.LENGTH_LONG).show();
-                disableEditText(txtValueName);
-                disableEditText(txtValueUsername);
-                disableEditText(txtValuePassword);
-                disableEditText(txtValueWebsite);
+                disableEditText();
             }
         });
 
@@ -222,10 +228,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 String secretKey = txtValue2FAKey.getText().toString();
                 myDB.updateCredentials(itemID, name, username, password, website, secretKey);
                 Toast.makeText(getApplicationContext(), "Details updated", Toast.LENGTH_LONG).show();
-                disableEditText(txtValueName);
-                disableEditText(txtValueUsername);
-                disableEditText(txtValuePassword);
-                disableEditText(txtValueWebsite);
+                disableEditText();
 
 
             }
@@ -265,9 +268,11 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     }
 
     private void initAnimation() {
-        Explode enterTransition = new Explode();
-        enterTransition.setDuration(500);
-        getWindow().setEnterTransition(enterTransition);
+
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//        Explode enterTransition = new Explode();
+//        enterTransition.setDuration(500);
+//        getWindow().setEnterTransition(enterTransition);
 
 //        Slide enterTransition = new Slide();
 //        enterTransition.setSlideEdge(Gravity.RIGHT);
@@ -301,21 +306,35 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 
     }
 
-    private void disableEditText(EditText editText) {
-        editText.setFocusable(false);
-        editText.setEnabled(false);
-        editText.setCursorVisible(false);
-        editText.setKeyListener(null);
-        editText.setBackgroundColor(Color.TRANSPARENT);
+    private void disableEditText() {
+
+//        txtName.setBoxStrokeColor(getResources().getColor(R.color.colorBlack));
+        txtName.setEnabled(false);
+        txtName.setFocusable(false);
+        txtUsername.setEnabled(false);
+        txtUsername.setFocusable(false);
+        txtWebsite.setEnabled(false);
+        txtWebsite.setFocusable(false);
+        txtPassword.setEnabled(false);
+        txtPassword.setFocusable(false);
+        txt2FAKey.setEnabled(false);
+        txt2FAKey.setFocusable(false);
+
     }
 
-    private void enableEditText(EditText editText) {
-        editText.setFocusable(true);
-        editText.setFocusableInTouchMode(true);
-        editText.setEnabled(true);
-        editText.setCursorVisible(true);
-        editText.setKeyListener(originalListener);
-        editText.setBackground(originalDrawable);
+    private void enableEditText() {
+        txtName.setEnabled(true);
+        txtName.setFocusable(true);
+        txtUsername.setEnabled(true);
+        txtUsername.setFocusable(true);
+        txtWebsite.setEnabled(true);
+        txtWebsite.setFocusable(true);
+        txtPassword.setEnabled(true);
+        txtPassword.setFocusable(true);
+        txt2FAKey.setEnabled(true);
+        txt2FAKey.setFocusable(true);
+
+
     }
 
     public Runnable runnable2FA = new Runnable() {
@@ -359,11 +378,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         if (id == R.id.edit_item) {
             btnUpdateCredentials.setVisibility(View.VISIBLE);
             btnUpdateCredentials.setEnabled(true);
-            enableEditText(txtValueName);
-            enableEditText(txtValueUsername);
-            enableEditText(txtValuePassword);
-            enableEditText(txtValueWebsite);
-            enableEditText(txtValue2FAKey);
+            enableEditText();
 
             return true;
         }
