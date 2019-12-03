@@ -303,8 +303,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
                     //If the cipher is initialized successfully, then create a CryptoObject instance//
                     cryptoObject = new FingerprintManager.CryptoObject(cipher);
 
-                    // Here, I’m referencing the FingerprintHandler class that we’ll create in the next section. This class will be responsible
-                    // for starting the authentication process (via the startAuth method) and processing the authentication process events//
+                    // Referencing the FingerprintHandler class
                     FingerprintHandler helper = new FingerprintHandler(this);
                     helper.startAuth(fingerprintManager, cryptoObject);
                 }
@@ -318,16 +317,16 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
             // Obtain a reference to the Keystore using the standard Android keystore container identifier (“AndroidKeystore”)//
             keyStore = KeyStore.getInstance("AndroidKeyStore");
 
-            //Generate the key//
+            //Generate the key
             keyGenerator = KeyGenerator.getInstance(KeyProperties.KEY_ALGORITHM_AES, "AndroidKeyStore");
 
-            //Initialize an empty KeyStore//
+            //Initialize an empty KeyStore
             keyStore.load(null);
 
             //Initialize the KeyGenerator//
             keyGenerator.init(new
 
-                    //Specify the operation(s) this key can be used for//
+                    //key operations
                     KeyGenParameterSpec.Builder(KEY_NAME,
                     KeyProperties.PURPOSE_ENCRYPT |
                             KeyProperties.PURPOSE_DECRYPT)
@@ -353,7 +352,7 @@ public class FingerprintAuthentication extends AppCompatActivity implements Loca
         }
     }
 
-    //Create a new method that we’ll use to initialize our cipher//
+    //method to initialize  cipher//
     public boolean initCipher() {
         try {
             //Obtain a cipher instance and configure it with the properties required for fingerprint authentication//

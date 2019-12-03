@@ -7,6 +7,11 @@ import androidx.annotation.Nullable;
 
 import com.mobilecomputing.one_sec.R;
 
+/*
+ * created by Avinash
+ */
+
+//Activity to confirm delete credential
 public class popup extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

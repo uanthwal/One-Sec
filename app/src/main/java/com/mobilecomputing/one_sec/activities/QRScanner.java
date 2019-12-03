@@ -1,5 +1,9 @@
 package com.mobilecomputing.one_sec.activities;
 
+/*
+ * created by Avinash
+ */
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,8 +37,10 @@ public class QRScanner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.qrscanner_layout);
 
+        //Camera is displayed in this
         cameraPreview = findViewById(R.id.cameraPreview);
 
+        //to detect QR codes
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE | Barcode.DATA_MATRIX).build();
 
@@ -43,8 +49,10 @@ public class QRScanner extends AppCompatActivity {
         cameraPreview.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
+                //Check for camera permissions
                 if(ActivityCompat.checkSelfPermission(QRScanner.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
                     System.out.println("No permissions");
+                    //Request for permission if permissions are not available
                     ActivityCompat
                             .requestPermissions(
                                     QRScanner.this,
@@ -72,6 +80,7 @@ public class QRScanner extends AppCompatActivity {
             }
         });
 
+        //Actively check for QR codes
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
@@ -80,6 +89,8 @@ public class QRScanner extends AppCompatActivity {
 
             @Override
             public void receiveDetections(Detector.Detections<Barcode> detections) {
+                //When a value is received from QR codes, the 2FA code is set to that value
+
                 SparseArray<Barcode> qrCodes = detections.getDetectedItems();
 
                 if(qrCodes.size() != 0 && once){
@@ -104,6 +115,7 @@ public class QRScanner extends AppCompatActivity {
         });
     }
 
+    //Runs when permissions are asked
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

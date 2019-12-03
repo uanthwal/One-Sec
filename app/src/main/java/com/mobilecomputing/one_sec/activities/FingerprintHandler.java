@@ -1,5 +1,9 @@
 package com.mobilecomputing.one_sec.activities;
 
+/*
+ * created by Avinash
+ */
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -33,9 +37,11 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         fingerprintImage = ((Activity)context).findViewById(R.id.imageView);
     }
 
+    //start fingerprint authentication
     public void startAuth(FingerprintManager manager, FingerprintManager.CryptoObject cryptoObject) {
 
         cancellationSignal = new CancellationSignal();
+        //check for permissions
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
@@ -44,22 +50,21 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
 
     @Override
 
-
+    //Authentication Error
     public void onAuthenticationError(int errMsgId, CharSequence errString) {
-
-
-//        Toast.makeText(context, "Authentication error\n" + errString, Toast.LENGTH_LONG).show();
+        System.out.println("Authentication error: "+ errString);
     }
 
     @Override
 
-
+    //Authentication failed
     public void onAuthenticationFailed() {
         fingerprintImage.setImageResource(R.mipmap.fp_fail);
         shakeImage();
         Toast.makeText(context, "Authentication failed", Toast.LENGTH_LONG).show();
     }
 
+    //Shake image in a linear way - horizontally
     public void shakeImage() {
         Animation shake;
         shake = AnimationUtils.loadAnimation(context, R.anim.linear_interpolator);
@@ -90,10 +95,11 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         Toast.makeText(context, "Authentication help\n" + helpString, Toast.LENGTH_LONG).show();
     }@Override
 
-
+    //Authentication Success
     public void onAuthenticationSucceeded(
             FingerprintManager.AuthenticationResult result) {
         fingerprintImage.setImageResource(R.mipmap.fp_succes);
+        //Display animation when fingerprint is successful
         Animation fade_out;
         fade_out = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
         fingerprintImage.startAnimation(fade_out);

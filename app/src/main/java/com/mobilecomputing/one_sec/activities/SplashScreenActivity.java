@@ -8,6 +8,10 @@ import android.os.Handler;
 
 import com.mobilecomputing.one_sec.R;
 
+/*
+ * created by Avinash
+ */
+
 public class SplashScreenActivity extends AppCompatActivity {
 
     int splashTime = 1000;

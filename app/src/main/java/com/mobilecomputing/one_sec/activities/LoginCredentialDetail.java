@@ -1,5 +1,8 @@
 package com.mobilecomputing.one_sec.activities;
 
+/*
+ * created by Avinash
+ */
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -99,6 +102,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         btnDeleteConfirm = deleteDialog.findViewById(R.id.btnDeleteConfirm);
         btnDeleteCancel = deleteDialog.findViewById(R.id.btnDeleteCancel);
 
+        //delete credential from database
         btnDeleteConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,6 +131,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             StrictMode.setThreadPolicy(policy);
         }
 
+        //map variables to items in layout
         txtName = findViewById(R.id.txtName);
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
@@ -168,17 +173,19 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         txtValue2FAKey.setText(getIntent().getStringExtra("SECRETKEY"));
 
 
+        //update database
         myDB = new DatabaseHelper(getApplicationContext());
         itemID = myDB.getIDFromName(name);
         myDB.updateCredentials(itemID, name, txtValueUsername.getText().toString(),
                 password, txtValueWebsite.getText().toString(),
                 txtValue2FAKey.getText().toString());
 
+        // get 2FA code
         handler2FA = new Handler();
         handler2FA.postDelayed(runnable2FA, 1000);
 
 
-
+        //QR Scanner
         txtValue2FAKey.setOnTouchListener(new View.OnTouchListener(){
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -193,7 +200,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 //                        Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_LONG).show();
 
 
-
+                        //QR Scanner for 2FA code
                         Intent intent = new Intent();
                         intent.setClass(LoginCredentialDetail.this, QRScanner.class);
                         intent.putExtra("NAME", txtValueName.getText().toString());
@@ -210,7 +217,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             }
         });
 
-
+        //Save updated details
         btnUsePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -227,6 +234,8 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             }
         });
 
+
+        //Password generator
         btnGeneratePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -235,6 +244,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             }
         });
 
+        //Change password length
         seekPasswordLength.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -255,6 +265,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         });
 
 
+        //Update Credentials
         btnUpdateCredentials.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -272,7 +283,9 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             }
         });
 
+        //Get favicon
         try {
+            //Send request to favicongrabber API
             String url = "http://favicongrabber.com/api/grab/";
             url += getIntent().getStringExtra("WEBSITE");
             System.out.println(url);
@@ -287,17 +300,11 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
                 content.append(inputLine);
             }
             in.close();
+            //Parse JSON Object
             JSONObject myResponse = new JSONObject(content.toString());
             JSONObject image = ((JSONArray) myResponse.get("icons")).getJSONObject(0);
             String imageURL = image.get("src").toString();
-//            RequestOptions options = new RequestOptions()
-//                    .centerCrop()
-//                    .placeholder(R.mipmap.ic_launcher_round)
-//                    .error(R.mipmap.ic_launcher_round);
-
-
-
-//            Glide.with(this).load(imageURL).apply(options).into(imgFavicon);
+            //load image from the url into imageView
             Picasso.get().load(imageURL).into(imgFavicon);
         } catch (Exception e) {
             e.printStackTrace();
@@ -319,11 +326,6 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 //        Explode enterTransition = new Explode();
 //        enterTransition.setDuration(500);
 //        getWindow().setEnterTransition(enterTransition);
-
-//        Slide enterTransition = new Slide();
-//        enterTransition.setSlideEdge(Gravity.RIGHT);
-//        enterTransition.setDuration(500);
-//        getWindow().setEnterTransition(enterTransition);
     }
 
     @Override
@@ -332,6 +334,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
+    //generate random password
     private String generatePassword(int length){
           final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
           final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
@@ -352,9 +355,9 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 
     }
 
+    //disable edit text
     private void disableEditText() {
 
-//        txtName.setBoxStrokeColor(getResources().getColor(R.color.colorBlack));
         txtName.setEnabled(false);
         txtName.setFocusable(false);
         txtUsername.setEnabled(false);
@@ -368,6 +371,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 
     }
 
+    //enable edit text
     private void enableEditText() {
         txtName.setEnabled(true);
         txtName.setFocusable(true);
@@ -383,6 +387,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
 
     }
 
+    //Get 2FA code
     public Runnable runnable2FA = new Runnable() {
         @Override
         public void run() {
@@ -410,6 +415,8 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     };
 
 
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //inflate the menu
@@ -421,6 +428,7 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        //edit credentials when edit button is cliked
         if (id == R.id.edit_item) {
             btnUpdateCredentials.setVisibility(View.VISIBLE);
             btnUpdateCredentials.setEnabled(true);
@@ -429,14 +437,9 @@ public class LoginCredentialDetail extends AppCompatActivity implements Serializ
             return true;
         }
 
+        //delete credentials when delete button is clicked
         else if (id == R.id.delete_item) {
             deleteDialog.show();
-//            myDB.deleteCredential(txtValueName.getText().toString());
-//            Toast.makeText(getApplicationContext(), "Login deleted", Toast.LENGTH_SHORT).show();
-//            Intent intent = new Intent();
-//            intent.setClass(getApplicationContext(), ViewCredentials.class);
-//            startActivity(intent);
-//            finish();
         }
 
         return super.onOptionsItemSelected(item);

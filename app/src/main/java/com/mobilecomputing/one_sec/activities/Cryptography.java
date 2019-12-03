@@ -1,5 +1,8 @@
 package com.mobilecomputing.one_sec.activities;
 
+/*
+ * created by Avinash
+ */
 
 import com.google.api.client.util.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -20,6 +23,7 @@ public class Cryptography {
     private int keySize = 512;
 
     public Cryptography() {
+        //Initialise keypair values
         try {
             Security.addProvider(new BouncyCastleProvider());
             keyGen = KeyPairGenerator.getInstance(algorithm);
@@ -33,6 +37,7 @@ public class Cryptography {
         }
     }
 
+    //singleton class
     public static Cryptography getInstance()
     {
         if (single_instance == null)
@@ -41,6 +46,7 @@ public class Cryptography {
         return single_instance;
     }
 
+    //encrypt the message
     public String encrypt(String message){
         try{
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
@@ -52,6 +58,7 @@ public class Cryptography {
         }
     }
 
+    //decrypt the message
     public String decrypt(String encryptedMessage){
         try{
             cipher.init(Cipher.DECRYPT_MODE, privateKey);

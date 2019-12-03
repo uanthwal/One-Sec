@@ -47,6 +47,7 @@ public class AddCredential extends AppCompatActivity {
         inputKey = findViewById(R.id.inputKey);
         btnSaveCredentials = findViewById(R.id.btnSaveCredentials);
 
+        //update website with name
         inputName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -66,6 +67,7 @@ public class AddCredential extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
 
+        //save details
         btnSaveCredentials.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
