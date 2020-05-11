@@ -26,8 +26,20 @@ Apart from the dependencies for the layouts and the required dependencies, the f
 
 <h3><b>Output:</b></h3>
 <div style="display:flex;">
-  <img src="https://github.com/uanthwal/Currency_Converter/blob/master/app_run_picture_1.png" height="450"/>
-  <img src="https://github.com/uanthwal/Currency_Converter/blob/master/app_run_picture_2.png" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_1.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_2.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_3.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_4.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_5.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_6.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_7.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_8.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_9.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_10.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_11.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_12.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_13.jpeg" height="450"/>
+  <img src="https://github.com/uanthwal/One-Sec/blob/master/demo/app_img_14.jpeg" height="450"/>
 <div>
 
 <h3><b>References:</b></h3>
