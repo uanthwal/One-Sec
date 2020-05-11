@@ -1,6 +1,36 @@
-One-Sec 
+<h3><b>Abstract:</b></h3>Security is an essential requirement for every person on this planet on their belongings, as is their right to expect the same from the products they purchase. When access management, privileges, roles, reminders, login information are so deeply rooted in people's lives for businesses, services, emails, finance, banking and so on, having a mobile application to address each need is a high priority. For the above case, this application aims to combine multiple security features such as password management, login credentials, safe-recognition, device-lock as an intuitive and appealing user interface to users from different streams into a mobile application. One-Sec is explicitly intended and released for mobile devices and has no desktop variants for Windows, OS-X, Unix, or platforms other than Android. 
+One-Sec, an android app that takes a base currency as an input and displays equivalent rates for other currencies.
 
-References
+<h3><b>Functionalities:</b></h3>One-Sec provides five main features namely,<br/>
+1. User Credentials <br/>
+2. Credit Card <br/>
+3. App Locker <br/>
+4. Photo Vault <br/>
+5. Notes <br/>
+
+<h3><b>Installation Process:</b></h3>1. Git clone https://github.com/uanthwal/One-Sec<br/>
+2. Import the project in Android Studio<br/>
+3. Wait for the gradle to finishing building activites<br/>
+4. Run the app<br/>
+
+<h3><b>Dependencies:</b></h3>
+Apart from the dependencies for the layouts and the required dependencies, the following dependencies were used. <br/>
+com.squareup.picasso:picasso:2.71828: This library is used to load images from a URL into an ImageView object <br/>
+androidx.cardview:cardview:1.0.0: This library is used to load layout items into cards. <br/>
+androidx.recyclerview:recyclerview:1.0.0: This library is used to display lists of items. <br/>
+de.hdodenhof:circleimageview:3.0.1: This library is used to display circular images. <br/>
+org.bouncycastle:bcprov-ext-jdk14:1.64: This library is used to encrypt and decrypt messages using various cryptographic algorithms. <br/>
+org.jboss.aerogear:aerogear-otp-java:1.0.0.M8: This library is used to generate 2-factor authentication codes using an authentication key. <br/>
+com.google.android.gms:play-services-vision:19.0.0: This library is used to scan QR codes using the device’s camera.  <br/>
+org.apache.lucene:lucene-spatial:8.2.0: This library is used to calculate the distance between two points using the latitude and longitude points. <br/>
+
+<h3><b>Output:</b></h3>
+<div style="display:flex;">
+  <img src="https://github.com/uanthwal/Currency_Converter/blob/master/app_run_picture_1.png" height="450"/>
+  <img src="https://github.com/uanthwal/Currency_Converter/blob/master/app_run_picture_2.png" height="450"/>
+<div>
+
+<h3><b>References:</b></h3>
 [1]J. Thornsby, "How to add fingerprint authentication to your Android app", Android Authority, 2019. [Online]. Available: https://www.androidauthority.com/how-to-add-fingerprint-authentication-to-your-android-app-747304/.
 
 [2]"RecyclerView", Youtube.com, 2019. [Online]. Available: https://www.youtube.com/watch?v=Vyqz_-sJGFk&t=897s.
