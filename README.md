@@ -15,14 +15,14 @@ One-Sec, an android app that takes a base currency as an input and displays equi
 
 <h3><b>Dependencies:</b></h3>
 Apart from the dependencies for the layouts and the required dependencies, the following dependencies were used. <br/>
-com.squareup.picasso:picasso:2.71828: This library is used to load images from a URL into an ImageView object <br/>
-androidx.cardview:cardview:1.0.0: This library is used to load layout items into cards. <br/>
-androidx.recyclerview:recyclerview:1.0.0: This library is used to display lists of items. <br/>
-de.hdodenhof:circleimageview:3.0.1: This library is used to display circular images. <br/>
-org.bouncycastle:bcprov-ext-jdk14:1.64: This library is used to encrypt and decrypt messages using various cryptographic algorithms. <br/>
-org.jboss.aerogear:aerogear-otp-java:1.0.0.M8: This library is used to generate 2-factor authentication codes using an authentication key. <br/>
-com.google.android.gms:play-services-vision:19.0.0: This library is used to scan QR codes using the device’s camera.  <br/>
-org.apache.lucene:lucene-spatial:8.2.0: This library is used to calculate the distance between two points using the latitude and longitude points. <br/>
+<b>com.squareup.picasso:picasso:2.71828:</b> This library is used to load images from a URL into an ImageView object <br/>
+<b>androidx.cardview:cardview:1.0.0:</b> This library is used to load layout items into cards. <br/>
+<b>androidx.recyclerview:recyclerview:1.0.0:</b> This library is used to display lists of items. <br/>
+<b>de.hdodenhof:circleimageview:3.0.1:</b> This library is used to display circular images. <br/>
+<b>org.bouncycastle:bcprov-ext-jdk14:1.64:</b> This library is used to encrypt and decrypt messages using various cryptographic algorithms. <br/>
+<b>org.jboss.aerogear:aerogear-otp-java:1.0.0.M8:</b> This library is used to generate 2-factor authentication codes using an authentication key. <br/>
+<b>com.google.android.gms:play-services-vision:19.0.0:</b> This library is used to scan QR codes using the device’s camera.  <br/>
+<b>org.apache.lucene:lucene-spatial:8.2.0:</b> This library is used to calculate the distance between two points using the latitude and longitude points. <br/>
 
 <h3><b>Output:</b></h3>
 <div style="display:flex;">
